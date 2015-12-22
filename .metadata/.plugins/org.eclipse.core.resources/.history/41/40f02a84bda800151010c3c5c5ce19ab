@@ -1,0 +1,18 @@
+from django.db import models
+from pip._vendor.cachecontrol.heuristics import LastModified
+
+class Device(models.Model):
+    type = models.CharField()
+    name = models.CharField()
+    version = models.CharField()
+    model = models.CharField()
+    imei = models.CharField()
+    sn = models.CharField()
+    originOwner = models.CharField()
+    borrower = models.CharField()
+    borrowedAt = models.DateTimeField()
+    returnAt = models.DateTimeField()
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updatedAt = models.DateTimeField()
+    LastModifiedAt = models.DateTimeField(auto_now=True)
+    
