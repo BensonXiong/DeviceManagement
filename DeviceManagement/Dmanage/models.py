@@ -1,0 +1,16 @@
+from django.db import models
+
+class Device(models.Model):
+    type = models.CharField()
+    name = models.CharField()
+    version = models.CharField()
+    model = models.CharField()
+    imei = models.CharField()
+    sn = models.CharField()
+    originOwner = models.CharField()
+    borrower = models.CharField()
+    borrowedAt = models.DateTimeField()
+    returnAt = models.DateTimeField()
+    createdAt = models.DateTimeField()
+    updatedAt = models.DateTimeField()
+    
