@@ -7,5 +7,6 @@ def index(request):
     return render(request,'Dmanage/device_list.html',context_dict)
 
 
-def borrowDevice(request,sn):
-    pass
+def borrowDevice(request,device_sn_slug):
+    context_dict={}
+    return render(request,'Dmanage/borrow_device.html',context_dict)

@@ -16,10 +16,11 @@ class Device(models.Model):
     returnAt = models.DateTimeField(blank=True,null=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     LastModifiedAt = models.DateTimeField(auto_now=True)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(max_length=128,unique=True)
     
     def save(self,*args,**kwargs):
         self.slug = slugify(self.sn)
+        super(Device,self).save(*args,**kwargs)
     
     def __str__(self):
         return self.name
