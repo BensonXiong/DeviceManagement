@@ -1,5 +1,6 @@
 from django.db import models
 from pip._vendor.cachecontrol.heuristics import LastModified
+from django.template.defaultfilters import slugify
 
 class Device(models.Model):
     TYPE_CHOICES = (('Android','And'),('Iphone','Ios'))
@@ -15,6 +16,10 @@ class Device(models.Model):
     returnAt = models.DateTimeField(blank=True,null=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     LastModifiedAt = models.DateTimeField(auto_now=True)
+    slug = models.SlugField(unique=True)
+    
+    def save(self,*args,**kwargs):
+        self.slug = slugify(self.sn)
     
     def __str__(self):
         return self.name

@@ -4,13 +4,14 @@
 </head>
 <body>
 {% if devices %}
-<ul>
+<table border="1">
 {% for device in devices %}
+<tr>
+<td>{{device.name}}</td>
+<td><a href="{% url 'borrow_device' device.slug %}">Borrow</a></td>
+</tr>
 {% endfor %}
-<li>
-{{ device.name }}
-</li>
-</ul>
+</table>
 {% endif %}
 </body>
 </html>
