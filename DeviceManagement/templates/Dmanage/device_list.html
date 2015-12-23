@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+{% if devices %}
+<ul>
+{% for device in devices %}
+{% endfor %}
+<li>
+{{ device.name }}
+</li>
+</ul>
+{% endif %}
+</body>
+</html>
