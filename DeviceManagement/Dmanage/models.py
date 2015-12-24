@@ -1,6 +1,6 @@
 from django.db import models
-from pip._vendor.cachecontrol.heuristics import LastModified
 from django.template.defaultfilters import slugify
+from django.db.models.fields.related import ForeignKey
 
 class Device(models.Model):
     TYPE_CHOICES = (('Android','And'),('Iphone','Ios'))
@@ -22,5 +22,18 @@ class Device(models.Model):
         super(Device,self).save(*args,**kwargs)
     
     def __str__(self):
-        return self.name + " " + self.type
+        return self.name
+    
+
+class History(models.Model):
+    device = ForeignKey(Device)
+    owner = models.CharField(max_length=128)
+    action = models.CharField(max_length=128)
+    dateAt = models.DateTimeField(blank=True,null=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    LastModifiedAt = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return models.Model.__str__(self)
+    
     
