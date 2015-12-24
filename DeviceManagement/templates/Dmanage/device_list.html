@@ -14,7 +14,7 @@
 <td>{{device.owner}}</td>
 <td>{{device.borrowedAt}}</td>
 <td>{{device.returnAt}}</td>
-<td><a href="{% url 'borrowDevice' device.slug %}">Borrow</a></td>
+<td><a href="{% url 'borrowDeviceForm' device.slug %}">Borrow</a></td>
 <td data-sn="{{device.sn}}" class="return-btn">Return</td>
 </tr>
 {% endfor %}

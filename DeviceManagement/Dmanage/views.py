@@ -10,8 +10,8 @@ def index(request):
     context_dict = {'devices':devices_list}
     return render(request,'Dmanage/device_list.html',context_dict)
 
-def borrowDevice(request,device_sn_slug):
-    device = Device.objects.get(sn=device_sn_slug)
+def borrowDeviceForm(request):
+   
     if request.method == 'POST':
         form = DeviceForm(request.POST)
         
@@ -19,11 +19,13 @@ def borrowDevice(request,device_sn_slug):
             pass
         
     else:
+        device_sn_slug = request.GET.get('sn')
+        device = Device.objects.get(sn=device_sn_slug)
         form = DeviceForm(instance = device)  
         print form  
     return render(request,'Dmanage/borrow_device.html',{'form':form})
 
-def borrow_Device(request):
+def submit_borrow(request):
     if request.method == 'POST':
         print request
         form = DeviceForm(request.POST)
