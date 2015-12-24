@@ -20,5 +20,7 @@ from Dmanage import views
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^list/$',views.index,name='device_list'),
-    url(r'^borrowDevice/(?P<device_sn_slug>\w+)/$',views.borrowDevice,name='borrowDevice')
+    url(r'^borrowDevice/(?P<device_sn_slug>\w+)/$',views.borrowDevice,name='borrowDevice'),
+    url(r'^submitDevice/$',views.borrow_Device,name='submitDevice'),
+    url(r'^return_device/$',views.return_device,name='returnDevice')
 ]

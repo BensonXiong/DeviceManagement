@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+{% load staticfiles %}
+<script src="{% static "js/jquery-1.11.3.min.js" %}"></script>
+<script src="{% static "js/dmanage-ajax.js" %}"></script>
 </head>
 <body>
 {% if devices %}
@@ -8,7 +11,11 @@
 {% for device in devices %}
 <tr>
 <td>{{device.name}}</td>
+<td>{{device.owner}}</td>
+<td>{{device.borrowedAt}}</td>
+<td>{{device.returnAt}}</td>
 <td><a href="{% url 'borrowDevice' device.slug %}">Borrow</a></td>
+<td data-sn="{{device.sn}}" class="return-btn">Return</td>
 </tr>
 {% endfor %}
 </table>
