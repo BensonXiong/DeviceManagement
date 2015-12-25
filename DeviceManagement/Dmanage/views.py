@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from Dmanage.models import Device
+from Dmanage.models import Device,History
 from Dmanage.forms import DeviceForm
 from django.http.response import HttpResponse, HttpResponseRedirect
 
@@ -42,4 +42,11 @@ def return_device(request):
         deviceInstance.returnAt = util.getLocalTime()
         deviceInstance.save();
     return HttpResponse('200')
+
+def device_history(request,device_sn_slug):
+    _device = Device.objects.get(sn=device_sn_slug)
+    _history = History.objects.filter(device__id=_device.id)
+    print _history
+    context_dict = {'historys':_history,'device':_device}
+    return render(request,'Dmanage/device_history.html',context_dict)
 
