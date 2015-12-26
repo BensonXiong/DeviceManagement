@@ -34,4 +34,5 @@ def add_history(sn,owner,action,dateAt):
 
 if __name__ == '__main__':
     print "Starting popluation script"
-    populate()
+    for x in range(20):
+        populate()
