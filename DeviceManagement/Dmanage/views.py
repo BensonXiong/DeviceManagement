@@ -24,6 +24,12 @@ def borrowDeviceForm(request,device_sn_slug):
             deviceInstance.returnAt = None
             deviceInstance.owner = owner
             deviceInstance.save()
+            
+            _history = History.objects.create(device=deviceInstance)
+            _history.action = 'checkin'
+            _history.owner = owner
+            _history.dateAt = deviceInstance.borrowedAt
+            _history.save()
             return HttpResponseRedirect('/list')
       
         
@@ -37,16 +43,22 @@ def borrowDeviceForm(request,device_sn_slug):
 def return_device(request):
     sn = request.GET.get('sn')
     deviceInstance = Device.objects.get(sn=sn)
+    owner = deviceInstance.owner
     if(deviceInstance.owner != 'system'):      
         deviceInstance.owner = 'system'
         deviceInstance.returnAt = util.getLocalTime()
         deviceInstance.save();
+        
+        _history = History.objects.create(device=deviceInstance)
+        _history.action = 'checkout'
+        _history.owner = owner
+        _history.dateAt = deviceInstance.borrowedAt
+        _history.save()
     return HttpResponse('200')
 
 def device_history(request,device_sn_slug):
     _device = Device.objects.get(sn=device_sn_slug)
     _history = History.objects.filter(device__id=_device.id)
-    print _history
     context_dict = {'historys':_history,'device':_device}
     return render(request,'Dmanage/device_history.html',context_dict)
 
