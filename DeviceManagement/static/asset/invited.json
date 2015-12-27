@@ -1,0 +1,138 @@
+[
+  {
+    "id":"10001",
+    "invited_name": "å¼ ä¸‰",
+    "invited_phone": "15018735211",
+    "invited_email": "zhangsan@163.com",
+    "inviter_name": "æŽå››",
+    "inviter_org": "ä¼—åŒ…é¡¹ç›®ç»„",
+    "invite_time": "2015å¹´3æœˆ26æ—¥",
+    "status": "æŽ¥å—é‚€è¯·"
+  }, {
+  "id":"10002",
+  "invited_name": "çŽ‹äº”",
+  "invited_phone": "15018735211",
+  "invited_email": "zhangsan@163.com",
+  "inviter_name": "æŽå››",
+  "inviter_org": "ä¼—åŒ…é¡¹ç›®ç»„",
+  "invite_time": "2015å¹´3æœˆ26æ—¥",
+  "status": "æœªæŽ¥å—é‚€è¯·"
+  }, {
+    "id":"10003",
+    "invited_name": "é™†å…­",
+    "invited_phone": "15018735211",
+    "invited_email": "zhangsan@163.com",
+    "inviter_name": "æŽå››",
+    "inviter_org": "TSG",
+    "invite_time": "2015å¹´3æœˆ26æ—¥",
+    "status": "ç¨‹åºé”™è¯¯ï¼Œå‘é€é‚€è¯·æœªæˆåŠŸ"
+  },  {
+  "id":"10001",
+  "invited_name": "å¼ ä¸‰",
+  "invited_phone": "15018735211",
+  "invited_email": "zhangsan@163.com",
+  "inviter_name": "æŽå››",
+  "inviter_org": "ä¼—åŒ…é¡¹ç›®ç»„",
+  "invite_time": "2015å¹´3æœˆ26æ—¥",
+  "status": "æŽ¥å—é‚€è¯·"
+}, {
+  "id":"10002",
+  "invited_name": "çŽ‹äº”",
+  "invited_phone": "15018735211",
+  "invited_email": "zhangsan@163.com",
+  "inviter_name": "æŽå››",
+  "inviter_org": "ä¼—åŒ…é¡¹ç›®ç»„",
+  "invite_time": "2015å¹´3æœˆ26æ—¥",
+  "status": "æœªæŽ¥å—é‚€è¯·"
+}, {
+  "id":"10003",
+  "invited_name": "é™†å…­",
+  "invited_phone": "15018735211",
+  "invited_email": "zhangsan@163.com",
+  "inviter_name": "æŽå››",
+  "inviter_org": "TSG",
+  "invite_time": "2015å¹´3æœˆ26æ—¥",
+  "status": "ç¨‹åºé”™è¯¯ï¼Œå‘é€é‚€è¯·æœªæˆåŠŸ"
+},  {
+  "id":"10001",
+  "invited_name": "å¼ ä¸‰",
+  "invited_phone": "15018735211",
+  "invited_email": "zhangsan@163.com",
+  "inviter_name": "æŽå››",
+  "inviter_org": "ä¼—åŒ…é¡¹ç›®ç»„",
+  "invite_time": "2015å¹´3æœˆ26æ—¥",
+  "status": "æŽ¥å—é‚€è¯·"
+}, {
+  "id":"10002",
+  "invited_name": "çŽ‹äº”",
+  "invited_phone": "15018735211",
+  "invited_email": "zhangsan@163.com",
+  "inviter_name": "æŽå››",
+  "inviter_org": "ä¼—åŒ…é¡¹ç›®ç»„",
+  "invite_time": "2015å¹´3æœˆ26æ—¥",
+  "status": "æœªæŽ¥å—é‚€è¯·"
+}, {
+  "id":"10003",
+  "invited_name": "é™†å…­",
+  "invited_phone": "15018735211",
+  "invited_email": "zhangsan@163.com",
+  "inviter_name": "æŽå››",
+  "inviter_org": "TSG",
+  "invite_time": "2015å¹´3æœˆ26æ—¥",
+  "status": "ç¨‹åºé”™è¯¯ï¼Œå‘é€é‚€è¯·æœªæˆåŠŸ"
+},  {
+  "id":"10001",
+  "invited_name": "å¼ ä¸‰",
+  "invited_phone": "15018735211",
+  "invited_email": "zhangsan@163.com",
+  "inviter_name": "æŽå››",
+  "inviter_org": "ä¼—åŒ…é¡¹ç›®ç»„",
+  "invite_time": "2015å¹´3æœˆ26æ—¥",
+  "status": "æŽ¥å—é‚€è¯·"
+}, {
+  "id":"10002",
+  "invited_name": "çŽ‹äº”",
+  "invited_phone": "15018735211",
+  "invited_email": "zhangsan@163.com",
+  "inviter_name": "æŽå››",
+  "inviter_org": "ä¼—åŒ…é¡¹ç›®ç»„",
+  "invite_time": "2015å¹´3æœˆ26æ—¥",
+  "status": "æœªæŽ¥å—é‚€è¯·"
+}, {
+  "id":"10003",
+  "invited_name": "é™†å…­",
+  "invited_phone": "15018735211",
+  "invited_email": "zhangsan@163.com",
+  "inviter_name": "æŽå››",
+  "inviter_org": "TSG",
+  "invite_time": "2015å¹´3æœˆ26æ—¥",
+  "status": "ç¨‹åºé”™è¯¯ï¼Œå‘é€é‚€è¯·æœªæˆåŠŸ"
+},  {
+  "id":"10001",
+  "invited_name": "å¼ ä¸‰",
+  "invited_phone": "15018735211",
+  "invited_email": "zhangsan@163.com",
+  "inviter_name": "æŽå››",
+  "inviter_org": "ä¼—åŒ…é¡¹ç›®ç»„",
+  "invite_time": "2015å¹´3æœˆ26æ—¥",
+  "status": "æŽ¥å—é‚€è¯·"
+}, {
+  "id":"10002",
+  "invited_name": "çŽ‹äº”",
+  "invited_phone": "15018735211",
+  "invited_email": "zhangsan@163.com",
+  "inviter_name": "æŽå››",
+  "inviter_org": "ä¼—åŒ…é¡¹ç›®ç»„",
+  "invite_time": "2015å¹´3æœˆ26æ—¥",
+  "status": "æœªæŽ¥å—é‚€è¯·"
+}, {
+  "id":"10003",
+  "invited_name": "é™†å…­",
+  "invited_phone": "15018735211",
+  "invited_email": "zhangsan@163.com",
+  "inviter_name": "æŽå››",
+  "inviter_org": "TSG",
+  "invite_time": "2015å¹´3æœˆ26æ—¥",
+  "status": "ç¨‹åºé”™è¯¯ï¼Œå‘é€é‚€è¯·æœªæˆåŠŸ"
+}
+]

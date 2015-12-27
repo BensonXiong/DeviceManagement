@@ -73,9 +73,5 @@ def device_history(request,device_sn_slug):
     return render(request,'Dmanage/device_history.html',context_dict)
 
 
-def bootstrape(request):
-    return render(request,'Dmanage/bootstrape.html',{})
-
-
-def welcome(request):
-    return render(request,'Dmanage/welcome.html',{})
+def bootstrap(request):
+    return render(request,'Dmanage/bootstrap.html',{})
