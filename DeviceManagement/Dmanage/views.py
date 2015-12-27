@@ -2,6 +2,8 @@ from django.shortcuts import render
 from Dmanage.models import Device,History
 from Dmanage.forms import DeviceForm
 from django.http.response import HttpResponse, HttpResponseRedirect
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+
 
 import util
 
@@ -59,6 +61,21 @@ def return_device(request):
 def device_history(request,device_sn_slug):
     _device = Device.objects.get(sn=device_sn_slug)
     _history = History.objects.filter(device__id=_device.id)
-    context_dict = {'historys':_history,'device':_device}
+    paginator = Paginator(_history,5)
+    page = request.GET.get('page')
+    try:
+        pageHistory = paginator.page(page)       
+    except PageNotAnInteger:
+        pageHistory = paginator.page(1)
+    except EmptyPage:
+        pageHistory = Paginator.page(Paginator.num_pages)
+    context_dict = {'historys':pageHistory,'device':_device}    
     return render(request,'Dmanage/device_history.html',context_dict)
 
+
+def bootstrape(request):
+    return render(request,'Dmanage/bootstrape.html',{})
+
+
+def welcome(request):
+    return render(request,'Dmanage/welcome.html',{})
