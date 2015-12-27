@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from Dmanage.models import Device,History
 from Dmanage.forms import DeviceForm
-from django.http.response import HttpResponse, HttpResponseRedirect
+from django.http.response import HttpResponse, HttpResponseRedirect,\
+    JsonResponse
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 
 import util
+import json
+from django.template.context_processors import request
 
 # Create your views here.
 def index(request):
@@ -75,3 +78,16 @@ def device_history(request,device_sn_slug):
 
 def bootstrap(request):
     return render(request,'Dmanage/bootstrap.html',{})
+
+def bootstrap_json(request):
+    jData =   [{
+    "id":"10001",
+    "invited_name": "a",
+    "invited_phone": "15018735211",
+    "invited_email": "zhangsan@163.com",
+    "inviter_name": "b",
+    "inviter_org": "c",
+    "invite_time": "",
+    "status": "e",
+  }]
+    return HttpResponse(json.dumps(jData), content_type="application/json")  

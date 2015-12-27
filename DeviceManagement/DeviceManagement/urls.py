@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^borrowDeviceForm/(.+)/$',views.borrowDeviceForm,name='borrowDeviceForm'),
     url(r'^return_device/$',views.return_device,name='returnDevice'),
     url(r'^bootstrap/$',views.bootstrap,name='bootstrap'),
+    url(r'^bootstrap_json/$',views.bootstrap_json,name='bootstrap_json'),
 ]
