@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+{% if device %}
+{% if historys %}
+<table border="1">
+{% for history in historys %}
+<tr>
+<td>{{device.name}}</td>
+<td>{{history.owner}}</td>
+<td>{{history.action}}</td>
+<td>{{history.dateAt}}</td>
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+{% endif %}
+<p>
+  {# topics.paginator.page_range 这个函数返回包含一个所有页码数的 range 对象 #}
+  {# 即 range(1, topics.paginator.num_pages + 1) #}
+  {% for page_number in topics.paginator.page_range %}
+    {% ifequal page_number  topics.number %}
+      {{ page_number }}
+    {% else %}
+      <a href="?page={{ page_number }}">{{ page_number }}</a>
+    {% endifequal %}
+  {% endfor %}
+</p>
+</body>
+</html>

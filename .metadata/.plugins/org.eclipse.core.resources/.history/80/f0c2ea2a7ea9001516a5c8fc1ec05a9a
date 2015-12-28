@@ -1,0 +1,27 @@
+from django.db import models
+from pip._vendor.cachecontrol.heuristics import LastModified
+from django.template.defaultfilters import slugify
+
+class Device(models.Model):
+    TYPE_CHOICES = (('Android','And'),('Iphone','Ios'))
+    type = models.CharField(max_length=128,choices=TYPE_CHOICES)
+    name = models.CharField(max_length=128)
+    version = models.CharField(max_length=128)
+    model = models.CharField(max_length=128)
+    imei = models.CharField(max_length=128,unique=True)
+    sn = models.CharField(max_length=128,unique=True)
+    originOwner = models.CharField(max_length=128,blank=True)
+    borrower = models.CharField(max_length=128,blank=True)
+    borrowedAt = models.DateTimeField(blank=True,null=True)
+    returnAt = models.DateTimeField(blank=True,null=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    LastModifiedAt = models.DateTimeField(auto_now=True)
+  
+    
+    def save(self,*args,**kwargs):
+       
+        super(Device,self).save(*args,**kwargs)
+    
+    def __str__(self):
+        return self.name
+    

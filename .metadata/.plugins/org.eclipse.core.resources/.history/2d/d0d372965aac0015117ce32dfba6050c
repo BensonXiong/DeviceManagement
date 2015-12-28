@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+{% if device %}
+{% if historys %}
+<table border="1">
+{% for history in historys %}
+<tr>
+<td>{{device.name}}</td>
+<td>{{history.owner}}</td>
+<td>{{history.action}}</td>
+<td>{{history.dateAt}}</td>
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+{% endif %}
+</body>
+</html>
