@@ -89,35 +89,6 @@ def device_history(request,device_sn_slug):
 def bootstrap(request):
     return render(request,'Dmanage/bootstrap.html',{})
 
-def bootstrap_json(request):
-    jData =   [{
-    "id":"10001",
-    "invited_name": "a",
-    "invited_phone": "15018735211",
-    "invited_email": "zhangsan@163.com",
-    "inviter_name": "b",
-    "inviter_org": "c",
-    "invite_time": "",
-    "status": "e",
-    },
-    {
-    "id":"10002",
-    "invited_name": "a",
-    "invited_phone": "15018735211",
-    "invited_email": "zhangsan@163.com",
-    "inviter_name": "b",
-    "inviter_org": "c",
-    "invite_time": "",
-    "status": "e",
-    },
-    {
-    "id":"10003",
-    "invited_name": "a",
-    "invited_phone": "15018735211",
-    "invited_email": "zhangsan@163.com",
-    "inviter_name": "b",
-    "inviter_org": "c",
-    "invite_time": "",
-    "status": "e",
-    },]
+def bootstrap_table_data(request):
+    jData =  {"total":233,"rows":[{"id":1,"name":"Item 1","price":"$1"},{"id":10,"name":"Item 10","price":"$10"},{"id":11,"name":"Item 11","price":"$11"},{"id":12,"name":"Item 12","price":"$12"},{"id":13,"name":"Item 13","price":"$13"},{"id":14,"name":"Item 14","price":"$14"},{"id":15,"name":"Item 15","price":"$15"},{"id":16,"name":"Item 16","price":"$16"},{"id":17,"name":"Item 17","price":"$17"},{"id":18,"name":"Item 18","price":"$18"}]}
     return HttpResponse(json.dumps(jData), content_type="application/json")  
