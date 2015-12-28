@@ -1,19 +1,28 @@
 from django.shortcuts import render
 from Dmanage.models import Device,History
 from Dmanage.forms import DeviceForm
-from django.http.response import HttpResponse, HttpResponseRedirect,\
-    JsonResponse
+from django.http.response import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from django.template.context_processors import request
+from django.db import transaction
 
 
 import util
 import json
-from django.template.context_processors import request
+from DmanageConstant import *
 
 # Create your views here.
 def index(request):
-    devices_list = Device.objects.order_by('-name')
-    context_dict = {'devices':devices_list}
+    _device = Device.objects.order_by('-name')
+    paginator = Paginator(_device,DmanageConstant['PaginatorSize'])
+    page = request.GET.get('page')
+    try:
+        pageResult = paginator.page(page)       
+    except PageNotAnInteger:
+        pageResult = paginator.page(1)
+    except EmptyPage:
+        pageResult = Paginator.page(Paginator.num_pages)
+    context_dict = {'PageResults':pageResult,'devices':_device}    
     return render(request,'Dmanage/device_list.html',context_dict)
 
 def borrowDeviceForm(request,device_sn_slug):
@@ -22,19 +31,20 @@ def borrowDeviceForm(request,device_sn_slug):
         form = DeviceForm(request.POST)
         
         if form.is_valid():
-            owner = form.cleaned_data['owner']
-            sn = form.cleaned_data['sn']
-            deviceInstance = Device.objects.get(sn=sn)
-            deviceInstance.borrowedAt = util.getLocalTime()
-            deviceInstance.returnAt = None
-            deviceInstance.owner = owner
-            deviceInstance.save()
+            with transaction.atomic():
+                owner = form.cleaned_data['owner']
+                sn = form.cleaned_data['sn']
+                deviceInstance = Device.objects.get(sn=sn)
+                deviceInstance.borrowedAt = util.getLocalTime()
+                deviceInstance.returnAt = None
+                deviceInstance.owner = owner
+                deviceInstance.save()
             
-            _history = History.objects.create(device=deviceInstance)
-            _history.action = 'checkin'
-            _history.owner = owner
-            _history.dateAt = deviceInstance.borrowedAt
-            _history.save()
+                _history = History.objects.create(device=deviceInstance)
+                _history.action = DmanageConstant['CheckIn']
+                _history.owner = owner
+                _history.dateAt = deviceInstance.borrowedAt
+                _history.save()
             return HttpResponseRedirect('/list')
       
         
@@ -49,13 +59,13 @@ def return_device(request):
     sn = request.GET.get('sn')
     deviceInstance = Device.objects.get(sn=sn)
     owner = deviceInstance.owner
-    if(deviceInstance.owner != 'system'):      
-        deviceInstance.owner = 'system'
+    if(deviceInstance.owner != DmanageConstant['SystemUser']):      
+        deviceInstance.owner = DmanageConstant['SystemUser']
         deviceInstance.returnAt = util.getLocalTime()
         deviceInstance.save();
         
         _history = History.objects.create(device=deviceInstance)
-        _history.action = 'checkout'
+        _history.action = DmanageConstant['CheckOut']
         _history.owner = owner
         _history.dateAt = deviceInstance.borrowedAt
         _history.save()
@@ -64,7 +74,7 @@ def return_device(request):
 def device_history(request,device_sn_slug):
     _device = Device.objects.get(sn=device_sn_slug)
     _history = History.objects.filter(device__id=_device.id)
-    paginator = Paginator(_history,5)
+    paginator = Paginator(_history,DmanageConstant['PaginatorSize'])
     page = request.GET.get('page')
     try:
         pageHistory = paginator.page(page)       
@@ -89,5 +99,25 @@ def bootstrap_json(request):
     "inviter_org": "c",
     "invite_time": "",
     "status": "e",
-  }]
+    },
+    {
+    "id":"10002",
+    "invited_name": "a",
+    "invited_phone": "15018735211",
+    "invited_email": "zhangsan@163.com",
+    "inviter_name": "b",
+    "inviter_org": "c",
+    "invite_time": "",
+    "status": "e",
+    },
+    {
+    "id":"10003",
+    "invited_name": "a",
+    "invited_phone": "15018735211",
+    "invited_email": "zhangsan@163.com",
+    "inviter_name": "b",
+    "inviter_org": "c",
+    "invite_time": "",
+    "status": "e",
+    },]
     return HttpResponse(json.dumps(jData), content_type="application/json")  
