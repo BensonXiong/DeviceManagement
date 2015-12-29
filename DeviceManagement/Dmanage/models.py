@@ -23,7 +23,7 @@ class Device(models.Model):
         self.slug = slugify(self.sn)
         super(Device,self).save(*args,**kwargs)
     
-    def __str__(self):
+    def __unicode__(self):
         return self.name
     
     def toJSON(self):

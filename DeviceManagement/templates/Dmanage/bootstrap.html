@@ -31,13 +31,31 @@
                 <th data-field="imei">imei</th>
                 <th data-field="borrowedAt">borrowedAt</th>
                 <th data-field="returnAt">returnAt</th>
+                <th data-field="History" data-formatter="historyFormatter">History</th>
+                <th data-field="Operation" data-formatter="operationFormatter" data-align="center">Operation</th>
             </tr>
+            
             </thead>
         </table>
     </div>
 <script>
     var $table = $('#table');
-
+	function historyFormatter(value)
+	{
+	return '<a href="/list">History</a>'
+	}
+	function operationFormatter(value)
+	{
+	return [
+            '<a class="like" href="javascript:void(0)" title="Like">',
+            '<i class="glyphicon glyphicon-heart"></i>',
+            '</a>  ',
+            '<a class="remove" href="javascript:void(0)" title="Remove">',
+            '<i class="glyphicon glyphicon-remove"></i>',
+            '</a>'
+        ].join('');
+	}
+	
     $(function () {
     });
 </script>

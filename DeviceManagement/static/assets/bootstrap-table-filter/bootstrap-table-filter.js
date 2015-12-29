@@ -399,7 +399,7 @@
 
         var fType = this.getFilterType(filter);
         if (fType.search) {
-            filter.$dropdownList.append($('<li class="static"><span><input type="text" class="form-control search-values" placeholder="Search"></span></li>'));
+            filter.$dropdownList.append($('<li class="static"><span><input type="text" class="form-control search-values" placeholder="Please Input name"></span></li>'));
             filter.$dropdownList.append($('<li class="static divider"></li>'));
         }
         if (fType.rows) {
