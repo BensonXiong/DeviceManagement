@@ -3,8 +3,10 @@ from Dmanage.models import Device,History
 from Dmanage.forms import DeviceForm
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from django.core.serializers.json import DateTimeAwareJSONEncoder
 from django.template.context_processors import request
 from django.db import transaction
+from django.core import serializers
 
 
 import util
@@ -90,5 +92,17 @@ def bootstrap(request):
     return render(request,'Dmanage/bootstrap.html',{})
 
 def bootstrap_table_data(request):
-    jData =  {"total":233,"rows":[{"id":1,"name":"Item 1","price":"$1"},{"id":10,"name":"Item 10","price":"$10"},{"id":11,"name":"Item 11","price":"$11"},{"id":12,"name":"Item 12","price":"$12"},{"id":13,"name":"Item 13","price":"$13"},{"id":14,"name":"Item 14","price":"$14"},{"id":15,"name":"Item 15","price":"$15"},{"id":16,"name":"Item 16","price":"$16"},{"id":17,"name":"Item 17","price":"$17"},{"id":18,"name":"Item 18","price":"$18"}]}
-    return HttpResponse(json.dumps(jData), content_type="application/json")  
+    currentPage = request.GET.get('offset')
+    limit = request.GET.get('limit')
+    _device = Device.objects.all()
+    paginator = Paginator(_device,limit)
+    try:
+        pageHistory = paginator.page(currentPage)
+    except PageNotAnInteger:
+        pageHistory = paginator.page(1)
+    except EmptyPage:
+        pageHistory = paginator.page(paginator.num_pages)
+    total = paginator.count
+    rows = util.preJsonEncode(pageHistory.object_list.values('name','version','model','imei'))
+    jData =  {"total":total,"rows":rows}
+    return HttpResponse(json.dumps(jData,cls=DateTimeAwareJSONEncoder), content_type="application/json")  
