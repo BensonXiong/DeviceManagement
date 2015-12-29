@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% load staticfiles %}
+    <title>Device Management</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href='{% static "assets/bootstrap/css/bootstrap.min.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/bootstrap-table/src/bootstrap-table.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/examples.css" %}'>
+    <script src='{% static "assets/jquery.min.js" %}'></script>
+    <script src='{% static "assets/bootstrap/js/bootstrap.js" %}'></script>
+    <script src='{% static "assets/bootstrap-table/src/bootstrap-table.js" %}'></script>
+    <script src='{% static "assets/ga.js" %}'></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Device Management</h1>
+        <table id="table"
+               data-toggle="table"
+               data-url="/list/bootstrap_table/data"
+               data-height="400"
+               data-side-pagination="server"
+               data-pagination="true"
+               data-page-list="[5, 10, 20, 50, 100, 200]"
+               data-search="true">
+            <thead>
+            <tr>
+                <th data-field="name">name</th>
+                <th data-field="version">version</th>
+                <th data-field="model">model</th>
+                <th data-field="imei">imei</th>
+                <th data-field="borrowedAt">borrowedAt</th>
+                <th data-field="returnAt">returnAt</th>
+                <th data-field="slug" data-formatter="historyFormatter">History</th>
+                <th data-field="Operation" data-formatter="operationFormatter" data-align="center">Operation</th>
+            </tr>
+            
+            </thead>
+        </table>
+    </div>
+<script>
+    var $table = $('#table');
+	function historyFormatter(value)
+	{
+	return '<a href="/list/'+ value + '">History</a>'
+	}
+	function operationFormatter(value)
+	{
+	return [
+            '<a class="like" href="javascript:void(0)" title="Like">',
+            '<i class="glyphicon glyphicon-heart"></i>',
+            '</a>  ',
+            '<a class="remove" href="javascript:void(0)" title="Remove">',
+            '<i class="glyphicon glyphicon-remove"></i>',
+            '</a>'
+        ].join('');
+	}
+	
+    $(function () {
+    });
+</script>
+</body>
+</html>

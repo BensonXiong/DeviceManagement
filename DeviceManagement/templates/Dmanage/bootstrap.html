@@ -14,6 +14,24 @@
 </head>
 <body>
     <div class="container">
+        <h2></h2>
+        <div class="row">
+            <div class="span6">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#">首页</a><span class="divider">></span>
+                    </li>
+                    <li>
+                        <a href="#">耳机页面</a><span class="divider">></span>
+                    </li>
+                    <li class="active">
+                        详细页面
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
         <h1>Device Management</h1>
         <table id="table"
                data-toggle="table"
@@ -29,10 +47,12 @@
                 <th data-field="version">version</th>
                 <th data-field="model">model</th>
                 <th data-field="imei">imei</th>
+                <th data-field="owner">owner</th>
                 <th data-field="borrowedAt">borrowedAt</th>
                 <th data-field="returnAt">returnAt</th>
                 <th data-field="slug" data-formatter="historyFormatter">History</th>
-                <th data-field="Operation" data-formatter="operationFormatter" data-align="center">Operation</th>
+                <th data-field="CheckIn" data-formatter="checkInFormatter" data-align="center">Check-in</th>
+                <th data-field="CheckOut" data-formatter="checkOutFormatter" data-align="center">Check-out</th>
             </tr>
             
             </thead>
@@ -42,16 +62,22 @@
     var $table = $('#table');
 	function historyFormatter(value)
 	{
-	return '<a href="/list/'+ value + '">History</a>'
+	return '<a href="/device_history/'+ value + '">History</a>'
 	}
-	function operationFormatter(value)
+	function checkInFormatter(value)
 	{
 	return [
             '<a class="like" href="javascript:void(0)" title="Like">',
-            '<i class="glyphicon glyphicon-heart"></i>',
+            '<i class="glyphicon glyphicon-log-in" style="color: rgb(2, 103, 198);"></i>',
             '</a>  ',
+        ].join('');
+	}
+	function checkOutFormatter(value)
+	{
+	return [
+ 
             '<a class="remove" href="javascript:void(0)" title="Remove">',
-            '<i class="glyphicon glyphicon-remove"></i>',
+            '<i class="glyphicon glyphicon-log-out" style="color: rgb(2, 103, 198);"></i>',
             '</a>'
         ].join('');
 	}
