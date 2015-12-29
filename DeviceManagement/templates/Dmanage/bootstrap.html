@@ -31,7 +31,7 @@
                 <th data-field="imei">imei</th>
                 <th data-field="borrowedAt">borrowedAt</th>
                 <th data-field="returnAt">returnAt</th>
-                <th data-field="History" data-formatter="historyFormatter">History</th>
+                <th data-field="slug" data-formatter="historyFormatter">History</th>
                 <th data-field="Operation" data-formatter="operationFormatter" data-align="center">Operation</th>
             </tr>
             
@@ -42,7 +42,7 @@
     var $table = $('#table');
 	function historyFormatter(value)
 	{
-	return '<a href="/list">History</a>'
+	return '<a href="/list/'+ value + '">History</a>'
 	}
 	function operationFormatter(value)
 	{
