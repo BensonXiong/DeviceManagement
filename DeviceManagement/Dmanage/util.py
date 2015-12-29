@@ -2,12 +2,17 @@ from django.utils import timezone
 from django.db import models
 from django.core.serializers.json import DateTimeAwareJSONEncoder
 from decimal import *
-def getLocalTime():
-    return timezone.localtime(timezone.now())
+
 
 import types
 
 import json
+
+from datetime import datetime,date
+
+
+def getLocalTime():
+    return timezone.localtime(timezone.now())
 
 def preJsonEncode(data):
     """
@@ -61,4 +66,12 @@ def preJsonEncode(data):
     ret = _any(data)
     
     return ret
-    
+
+class JSONDateTimeEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return obj.strftime('%Y-%m-%d %H:%M:%S')
+        elif isinstance(obj, date):
+            return obj.strftime('%Y-%m-%d')
+        else:
+            return json.JSONEncoder.default(self, obj) 

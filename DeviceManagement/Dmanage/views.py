@@ -103,6 +103,6 @@ def bootstrap_table_data(request):
     except EmptyPage:
         pageHistory = paginator.page(paginator.num_pages)
     total = paginator.count
-    rows = util.preJsonEncode(pageHistory.object_list.values('name','version','model','imei'))
+    rows = util.preJsonEncode(pageHistory.object_list.values('name','version','model','imei','borrowedAt','returnAt'))
     jData =  {"total":total,"rows":rows}
-    return HttpResponse(json.dumps(jData,cls=DateTimeAwareJSONEncoder), content_type="application/json")  
+    return HttpResponse(json.dumps(jData,cls=util.JSONDateTimeEncoder), content_type="application/json")  
