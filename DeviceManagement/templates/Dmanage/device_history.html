@@ -2,64 +2,46 @@
 <html>
 <head>
 {% load staticfiles %}
-   <link href="//cdn.bootcss.com/bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
-   <link href="//cdn.bootcss.com/bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
-   <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-   <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-</head>
+    <title>Device Management</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href='{% static "assets/bootstrap/css/bootstrap.min.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/bootstrap-table/src/bootstrap-table.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/examples.css" %}'>
+    <script src='{% static "assets/jquery.min.js" %}'></script>
+    <script src='{% static "assets/bootstrap/js/bootstrap.js" %}'></script>
+    <script src='{% static "assets/bootstrap-table/src/bootstrap-table.js" %}'></script>
+    <script src='{% static "assets/ga.js" %}'></script>
 </head>
 <body>
-{% if device %}
-{% if historys %}
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span12">
-			<form class="form-search  form-inline">
-				
-			</form>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>
-							名称
-						</th>
-						<th>
-							拥有者
-						</th>
-						<th>
-							行为
-						</th>
-						<th>
-							时间
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for history in historys %}
-					<tr>
-					<td>{{device.name}}</td>
-					<td>{{history.owner}}</td>
-					<td>{{history.action}}</td>
-					<td>{{history.dateAt}}</td>
-					</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-			{% endif %}
-			{% endif %}
-			<div class="pagination pagination-right">
-				<ul>
-					 {% for page_number in historys.paginator.page_range %}
-    				 {% ifequal page_number  historys.number %}
-     				 <li class="active"><a>{{ page_number }}</a></li>
-    				 {% else %}
-     				 <li><a href="?page={{ page_number }}">{{ page_number }}</a></li>
-    				 {% endifequal %}
- 					 {% endfor %}
-				</ul>
-			</div>
-		</div>
-	</div>
-</div>
+    <div class="container">
+        <h1>Device Management</h1>
+        <table id="table"
+               data-toggle="table"
+               data-url="/list/{{slug}}/history/data"
+               data-height="400"
+               data-side-pagination="server"
+               data-pagination="true"
+               data-page-list="[5, 10, 20, 50, 100, 200]"
+               data-search="false">
+            <thead>
+            <tr>
+                <th data-field="name" data-formatter="nameFormatter">名称</th>
+                <th data-field="owner">拥有者</th>
+                <th data-field="action">行为</th>
+                <th data-field="dateAt">时间</th>
+            </tr>
+            
+            </thead>
+        </table>
+    </div>
+<script>
+    var $table = $('#table');
+    function nameFormatter(value)
+    {
+    	return "{{slug}}"
+    }
+   		 $(function () {
+    });
+</script>
 </body>
 </html>

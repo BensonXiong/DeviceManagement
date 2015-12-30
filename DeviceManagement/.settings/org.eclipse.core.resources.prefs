@@ -2,4 +2,3 @@ eclipse.preferences.version=1
 encoding//Dmanage/DmanageConstant.py=utf-8
 encoding//Dmanage/util.py=utf-8
 encoding//Dmanage/views.py=gb18030
-encoding//templates/Dmanage/device_history.html=UTF-8

@@ -420,7 +420,7 @@
             return sprintf('Showing %s rows', totalRows);
         },
         formatSearch: function () {
-            return 'Search';
+            return 'Name or Version';
         },
         formatNoMatches: function () {
             return 'No matching records found';

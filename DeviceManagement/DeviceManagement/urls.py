@@ -19,10 +19,10 @@ from Dmanage import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^list/$',views.index,name='device_list'),
-    url(r'^device_history/(?P<device_sn_slug>\w+)/$',views.device_history,name='device_history'),
     url(r'^borrowDeviceForm/(.+)/$',views.borrowDeviceForm,name='borrowDeviceForm'),
     url(r'^return_device/$',views.return_device,name='returnDevice'),
-    url(r'^bootstrap/$',views.bootstrap,name='bootstrap'),
-    url(r'^list/bootstrap_table/data$',views.bootstrap_table_data,name='bootstrap_table_data'),
+    url(r'^list/$',views.list,name='list'),
+    url(r'^list/(?P<device_sn_slug>\w+)/history/$',views.device_history,name='device_history'),
+    url(r'^list/data$',views.list_data,name='list_data'),
+    url(r'^list/(?P<device_sn_slug>\w+)/history/data$',views.device_history_data,name='device_history_data'),
 ]

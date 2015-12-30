@@ -18,18 +18,6 @@ import json
 
 
 # Create your views here.
-def index(request):
-    _device = Device.objects.order_by('-name')
-    paginator = Paginator(_device,DmanageConstant['PaginatorSize'])
-    page = request.GET.get('page')
-    try:
-        pageResult = paginator.page(page)       
-    except PageNotAnInteger:
-        pageResult = paginator.page(1)
-    except EmptyPage:
-        pageResult = Paginator.page(Paginator.num_pages)
-    context_dict = {'PageResults':pageResult,'devices':_device}    
-    return render(request,'Dmanage/device_list.html',context_dict)
 
 def borrowDeviceForm(request,device_sn_slug):
     device = Device.objects.get(sn=device_sn_slug)
@@ -77,29 +65,17 @@ def return_device(request):
         _history.save()
     return HttpResponse('200')
 
+
+def list(request):
+    return render(request,'Dmanage/device_list.html',{})
+
 def device_history(request,device_sn_slug):
-    _device = Device.objects.get(sn=device_sn_slug)
-    _history = History.objects.filter(device__id=_device.id)
-    paginator = Paginator(_history,DmanageConstant['PaginatorSize'])
-    page = request.GET.get('page')
-    try:
-        pageHistory = paginator.page(page)       
-    except PageNotAnInteger:
-        pageHistory = paginator.page(1)
-    except EmptyPage:
-        pageHistory = Paginator.page(Paginator.num_pages)
-    context_dict = {'historys':pageHistory,'device':_device}    
-    return render(request,'Dmanage/device_history.html',context_dict)
+    return render(request,'Dmanage/device_history.html',{'slug':device_sn_slug})
 
-
-def bootstrap(request):
-    return render(request,'Dmanage/bootstrap.html',{})
-
-def bootstrap_table_data(request):
+def list_data(request):
     currentPage = request.GET.get('offset')
     limit = request.GET.get('limit')
     search = request.GET.get('search')
-    print search
     if (search):
         searchSql = 'name like "%{0}%" or version like "%{0}%"'.format(search)
         _device = Device.objects.extra(where=[searchSql])
@@ -114,5 +90,22 @@ def bootstrap_table_data(request):
         pageHistory = paginator.page(paginator.num_pages)
     total = paginator.count
     rows = util.preJsonEncode(pageHistory.object_list.values('name','version','model','imei','owner','borrowedAt','returnAt','slug'))
+    jData =  {"total":total,"rows":rows}
+    return HttpResponse(json.dumps(jData,cls=util.JSONDateTimeEncoder), content_type="application/json")  
+
+def device_history_data(request,device_sn_slug):
+    currentPage = request.GET.get('offset')
+    limit = request.GET.get('limit')
+    _device = Device.objects.get(sn=device_sn_slug)
+    _history = History.objects.filter(device__id=_device.id)
+    paginator = Paginator(_history,limit)
+    try:
+        pageHistory = paginator.page(currentPage)       
+    except PageNotAnInteger:
+        pageHistory = paginator.page(1)
+    except EmptyPage:
+        pageHistory = paginator.page(paginator.num_pages)
+    total = paginator.count
+    rows = util.preJsonEncode(pageHistory.object_list.values('device','owner','action','dateAt'))
     jData =  {"total":total,"rows":rows}
     return HttpResponse(json.dumps(jData,cls=util.JSONDateTimeEncoder), content_type="application/json")  
