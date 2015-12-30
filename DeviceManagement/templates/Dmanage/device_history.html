@@ -2,7 +2,6 @@
 <html>
 <head>
 {% load staticfiles %}
-    <title>Device Management</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href='{% static "assets/bootstrap/css/bootstrap.min.css" %}'>
     <link rel="stylesheet" href='{% static "assets/bootstrap-table/src/bootstrap-table.css" %}'>
@@ -14,10 +13,24 @@
 </head>
 <body>
     <div class="container">
-        <h1>Device Management</h1>
+        <h2></h2>
+        <div class="row">
+            <div class="span6">
+                <ul class="breadcrumb">
+                	<li>
+                        <a href="{% url 'list' %}">首页</a><span class="divider">></span>
+                    </li>
+                    <li class="active">
+                        	历史
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
         <table id="table"
                data-toggle="table"
-               data-url="/list/{{slug}}/history/data"
+               data-url="{% url 'device_history_data' slug %}"
                data-height="400"
                data-side-pagination="server"
                data-pagination="true"

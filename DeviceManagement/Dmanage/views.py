@@ -73,9 +73,12 @@ def device_history(request,device_sn_slug):
     return render(request,'Dmanage/device_history.html',{'slug':device_sn_slug})
 
 def list_data(request):
-    currentPage = request.GET.get('offset')
-    limit = request.GET.get('limit')
+    currentPage = int(request.GET.get('offset'))
+    limit = int(request.GET.get('limit'))
+    currentPage = currentPage /limit + 1
     search = request.GET.get('search')
+    if (isinstance(currentPage, int)):
+        currentPage = currentPage +1
     if (search):
         searchSql = 'name like "%{0}%" or version like "%{0}%"'.format(search)
         _device = Device.objects.extra(where=[searchSql])
@@ -94,8 +97,9 @@ def list_data(request):
     return HttpResponse(json.dumps(jData,cls=util.JSONDateTimeEncoder), content_type="application/json")  
 
 def device_history_data(request,device_sn_slug):
-    currentPage = request.GET.get('offset')
-    limit = request.GET.get('limit')
+    currentPage = int(request.GET.get('offset'))
+    limit = int(request.GET.get('limit'))
+    currentPage = currentPage /limit + 1
     _device = Device.objects.get(sn=device_sn_slug)
     _history = History.objects.filter(device__id=_device.id)
     paginator = Paginator(_history,limit)

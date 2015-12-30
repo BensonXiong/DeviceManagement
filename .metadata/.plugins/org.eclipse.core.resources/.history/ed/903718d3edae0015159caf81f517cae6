@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% load staticfiles %}
+    <title>Device Management</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href='{% static "assets/bootstrap/css/bootstrap.min.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/bootstrap-table/src/bootstrap-table.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/examples.css" %}'>
+    <script src='{% static "assets/jquery.min.js" %}'></script>
+    <script src='{% static "assets/bootstrap/js/bootstrap.js" %}'></script>
+    <script src='{% static "assets/bootstrap-table/src/bootstrap-table.js" %}'></script>
+    <script src='{% static "assets/ga.js" %}'></script>
+</head>
+<body>
+    <div class="container">
+        <h2></h2>
+        <div class="row">
+            <div class="span6">
+                <ul class="breadcrumb">
+                	<li>
+                        <a href="/list">首页</a><span class="divider">></span>
+                    </li>
+                    <li class="active">
+                        	历史
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Device Management</h1>
+        <table id="table"
+               data-toggle="table"
+               data-url="/list/{{slug}}/history/data"
+               data-height="400"
+               data-side-pagination="server"
+               data-pagination="true"
+               data-page-list="[5, 10, 20, 50, 100, 200]"
+               data-search="false">
+            <thead>
+            <tr>
+                <th data-field="name" data-formatter="nameFormatter">名称</th>
+                <th data-field="owner">拥有者</th>
+                <th data-field="action">行为</th>
+                <th data-field="dateAt">时间</th>
+            </tr>
+            
+            </thead>
+        </table>
+    </div>
+<script>
+    var $table = $('#table');
+    function nameFormatter(value)
+    {
+    	return "{{slug}}"
+    }
+   		 $(function () {
+    });
+</script>
+</body>
+</html>

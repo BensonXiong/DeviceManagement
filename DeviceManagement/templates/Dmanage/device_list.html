@@ -14,28 +14,10 @@
 </head>
 <body>
     <div class="container">
-        <h2></h2>
-        <div class="row">
-            <div class="span6">
-                <ul class="breadcrumb">
-                    <li>
-                        <a href="#">首页</a><span class="divider">></span>
-                    </li>
-                    <li>
-                        <a href="#">耳机页面</a><span class="divider">></span>
-                    </li>
-                    <li class="active">
-                        详细页面
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container">
         <h1>Device Management</h1>
         <table id="table"
                data-toggle="table"
-               data-url="/list/data"
+               data-url="{% url 'list_data' %}"
                data-height="400"
                data-side-pagination="server"
                data-pagination="true"
@@ -64,6 +46,7 @@
     {
     return value
     }
+    //To do ,use the url pattern
 	function historyFormatter(value)
 	{
 	return '<a href="/list/'+ value + '/history/">History</a>'

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="41" version="2.0">
+<workbench progressCount="58" version="2.0">
 <workbenchAdvisor/>
 <window height="734" maximized="true" width="1024" x="157" y="22">
 <fastViewData fastViewLocation="1024"/>
@@ -50,7 +50,7 @@
 </editorArea>
 <editor id="org.python.pydev.editor.PythonEditor" name="models.py" partName="models" path="C:/Users/Benson/DjangoWorkspace/DeviceManagement/Dmanage/models.py" title="models" tooltip="DeviceManagement/Dmanage/models.py" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DeviceManagement/Dmanage/models.py"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="542" selectionTopPixel="120"/>
+<editorState selectionHorizontalPixel="0" selectionLength="5" selectionOffset="598" selectionTopPixel="90"/>
 </editor>
 <editor id="org.python.pydev.editor.PythonEditor" name="urls.py" partName="urls" path="C:/Users/Benson/DjangoWorkspace/DeviceManagement/DeviceManagement/urls.py" title="urls" tooltip="DeviceManagement/DeviceManagement/urls.py" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DeviceManagement/DeviceManagement/urls.py"/>
@@ -58,11 +58,11 @@
 </editor>
 <editor id="org.python.pydev.editor.PythonEditor" name="views.py" partName="views" path="C:/Users/Benson/DjangoWorkspace/DeviceManagement/Dmanage/views.py" title="views" tooltip="DeviceManagement/Dmanage/views.py" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DeviceManagement/Dmanage/views.py"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3478" selectionTopPixel="1134"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="4125" selectionTopPixel="1344"/>
 </editor>
 <editor activePart="true" focus="true" id="org.eclipse.wst.html.core.htmlsource.source" name="bootstrap.html" partName="bootstrap.html" path="C:/Users/Benson/DjangoWorkspace/DeviceManagement/templates/Dmanage/bootstrap.html" title="bootstrap.html" tooltip="DeviceManagement/templates/Dmanage/bootstrap.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DeviceManagement/templates/Dmanage/bootstrap.html"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="751" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1940" selectionTopPixel="660"/>
 </editor>
 <editor id="org.eclipse.wst.html.core.htmlsource.source" name="device_list.html" partName="device_list.html" path="C:/Users/Benson/DjangoWorkspace/DeviceManagement/templates/Dmanage/device_list.html" title="device_list.html" tooltip="DeviceManagement/templates/Dmanage/device_list.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DeviceManagement/templates/Dmanage/device_list.html"/>
@@ -152,7 +152,7 @@
 </view>
 <view id="org.eclipse.wst.server.ui.ServersView" partName="Servers"/>
 </views>
-<perspectives activePart="org.eclipse.wst.html.core.htmlsource.source" activePerspective="org.python.pydev.ui.PythonPerspective">
+<perspectives activePart="org.eclipse.ui.console.ConsoleView" activePerspective="org.python.pydev.ui.PythonPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.pde.internal.ui.PDEPerspective" id="org.eclipse.pde.ui.PDEPerspective" label="Plug-in Development"/>
 <alwaysOnActionSet id="org.eclipse.egit.ui.navigation"/>
@@ -464,31 +464,9 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/DeviceManagement/templates/Dmanage/bootstrap.html"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/DeviceManagement/templates/Dmanage/device_list.html"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/DeviceManagement/DeviceManagement/urls.py"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/DeviceManagement/Dmanage/models.py"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/DeviceManagement/Dmanage/views.py"/>
 </editors>
-<item historyLabel="response" index="1">
-<position info="not_deleted" x="12281" y="0"/>
-</item>
-<item historyLabel="response" index="1">
-<position info="not_deleted" x="18282" y="0"/>
-</item>
-<item historyLabel="views" index="0">
-<position info="not_deleted" x="3177" y="0"/>
-</item>
-<item historyLabel="base" index="2">
-<position info="not_deleted" x="5284" y="0"/>
-</item>
-<item historyLabel="base" index="2">
-<position info="not_deleted" x="5995" y="0"/>
-</item>
-<item historyLabel="base" index="2">
-<position info="not_deleted" x="6613" y="0"/>
-</item>
-<item historyLabel="base" index="2">
-<position info="not_deleted" x="9542" y="0"/>
-</item>
-<item historyLabel="base" index="2">
-<position info="not_deleted" x="9623" y="0"/>
-</item>
 <item historyLabel="base" index="2">
 <position info="not_deleted" x="9687" y="0"/>
 </item>
@@ -612,8 +590,32 @@
 <item historyLabel="views" index="0">
 <position info="not_deleted" x="3478" y="0"/>
 </item>
-<item active="true" historyLabel="bootstrap.html" index="5">
+<item historyLabel="bootstrap.html" index="5">
 <position info="not_deleted" x="841" y="26"/>
+</item>
+<item historyLabel="models" index="8">
+<position info="not_deleted" x="542" y="0"/>
+</item>
+<item historyLabel="views" index="9">
+<position info="not_deleted" x="3478" y="0"/>
+</item>
+<item historyLabel="bootstrap.html" index="5">
+<position info="not_deleted" x="1945" y="0"/>
+</item>
+<item historyLabel="views" index="9">
+<position info="not_deleted" x="3478" y="0"/>
+</item>
+<item historyLabel="models" index="8">
+<position info="not_deleted" x="598" y="5"/>
+</item>
+<item historyLabel="views" index="9">
+<position info="not_deleted" x="4125" y="0"/>
+</item>
+<item historyLabel="models" index="8">
+<position info="not_deleted" x="598" y="5"/>
+</item>
+<item active="true" historyLabel="bootstrap.html" index="5">
+<position info="not_deleted" x="1945" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
