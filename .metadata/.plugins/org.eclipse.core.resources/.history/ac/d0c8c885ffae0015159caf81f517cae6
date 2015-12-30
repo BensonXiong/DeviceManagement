@@ -33,8 +33,8 @@
                 <th data-field="borrowedAt">borrowedAt</th>
                 <th data-field="returnAt">returnAt</th>
                 <th data-field="slug" data-formatter="historyFormatter">History</th>
-                <th data-field="CheckIn" data-formatter="checkInFormatter" data-align="center" data-events="checkInEvents">Check-in</th>
-                <th data-field="CheckOut" data-formatter="checkOutFormatter" data-align="center" data-events="checkInEvents">Check-out</th>
+                <th data-field="CheckIn" data-formatter="checkInFormatter" data-align="center">Check-in</th>
+                <th data-field="CheckOut" data-formatter="checkOutFormatter" data-align="center">Check-out</th>
             </tr>
             
             </thead>
@@ -54,7 +54,7 @@
 	function checkInFormatter(value)
 	{
 	return [
-            '<a class="return-btn" title="Check-in">',
+            '<a class="return-btn" href="javascript:void(0)" title="Check-in">',
             '<i class="glyphicon glyphicon-log-in" style="color: rgb(2, 103, 198);"></i>',
             '</a>  ',
         ].join('');
@@ -68,14 +68,7 @@
             '</a>'
         ].join('');
 	}
-	window.checkInEvents = {
-			'click .return-btn': function (e, value, row, index) {
-	            alert('You click like action, row: ' + JSON.stringify(row));
-	        },
-	        'click .remove': function (e, value, row, index) {
-	        	alert('You click like action, row: ' + JSON.stringify(row));
-	        }
-	}
+	
     $(function () {
     });
 </script>

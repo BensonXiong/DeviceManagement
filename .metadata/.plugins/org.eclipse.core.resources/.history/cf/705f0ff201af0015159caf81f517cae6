@@ -11,6 +11,7 @@
     <script src='{% static "assets/bootstrap/js/bootstrap.js" %}'></script>
     <script src='{% static "assets/bootstrap-table/src/bootstrap-table.js" %}'></script>
     <script src='{% static "assets/ga.js" %}'></script>
+    <script src='{% static "js/dmanage-ajax.js" %}'></script>
 </head>
 <body>
     <div class="container">
@@ -34,7 +35,7 @@
                 <th data-field="returnAt">returnAt</th>
                 <th data-field="slug" data-formatter="historyFormatter">History</th>
                 <th data-field="CheckIn" data-formatter="checkInFormatter" data-align="center" data-events="checkInEvents">Check-in</th>
-                <th data-field="CheckOut" data-formatter="checkOutFormatter" data-align="center" data-events="checkInEvents">Check-out</th>
+                <th data-field="CheckOut" data-formatter="checkOutFormatter" data-align="center">Check-out</th>
             </tr>
             
             </thead>
@@ -72,9 +73,6 @@
 			'click .return-btn': function (e, value, row, index) {
 	            alert('You click like action, row: ' + JSON.stringify(row));
 	        },
-	        'click .remove': function (e, value, row, index) {
-	        	alert('You click like action, row: ' + JSON.stringify(row));
-	        }
 	}
     $(function () {
     });
