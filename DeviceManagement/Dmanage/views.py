@@ -1,3 +1,4 @@
+# -*- coding=gb18030 -*-
 from django.shortcuts import render
 from Dmanage.models import Device,History
 from Dmanage.forms import DeviceForm
@@ -7,11 +8,14 @@ from django.core.serializers.json import DateTimeAwareJSONEncoder
 from django.template.context_processors import request
 from django.db import transaction
 from django.core import serializers
-
+from DmanageConstant import *
 
 import util
 import json
-from DmanageConstant import *
+
+
+
+
 
 # Create your views here.
 def index(request):
@@ -94,7 +98,13 @@ def bootstrap(request):
 def bootstrap_table_data(request):
     currentPage = request.GET.get('offset')
     limit = request.GET.get('limit')
-    _device = Device.objects.all()
+    search = request.GET.get('search')
+    print search
+    if (search):
+        searchSql = 'name like "%{0}%" or version like "%{0}%"'.format(search)
+        _device = Device.objects.extra(where=[searchSql])
+    else:
+        _device = Device.objects.all()
     paginator = Paginator(_device,limit)
     try:
         pageHistory = paginator.page(currentPage)

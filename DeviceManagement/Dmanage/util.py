@@ -3,11 +3,15 @@ from django.db import models
 from django.core.serializers.json import DateTimeAwareJSONEncoder
 from decimal import *
 
+import sys
+
+# Please ignore the compilation error ,it works after relaod(sys).In order to change the coding from ascii to utf-8 
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 import types
 
 import json
-
 from datetime import datetime,date
 
 
@@ -66,6 +70,12 @@ def preJsonEncode(data):
     ret = _any(data)
     
     return ret
+
+def encodeString(s):
+    if isinstance(s, unicode):
+        return s.encode('gb2312')
+    else:
+        return s.decode('utf-8').encode('gb2312')
 
 class JSONDateTimeEncoder(json.JSONEncoder):
     def default(self, obj):
