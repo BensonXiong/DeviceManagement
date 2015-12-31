@@ -45,37 +45,65 @@
     function nameFormatter(value)
     {
     return value
-    }
+    };
+    
     //To do ,use the url pattern
 	function historyFormatter(value)
 	{
 	return '<a href="/list/'+ value + '/history/">History</a>'
-	}
+	};
+	
 	function checkInFormatter(value)
 	{
 	return [
-            '<a class="return-btn" title="Check-in">',
+            '<a class="borrow-btn" href="javascript:void(0)" title="Check-in">',
             '<i class="glyphicon glyphicon-log-in" style="color: rgb(2, 103, 198);"></i>',
             '</a>  ',
         ].join('');
-	}
+	};
+	
 	function checkOutFormatter(value)
 	{
 	return [
  
-            '<a class="remove" href="javascript:void(0)" title="Check-out">',
+            '<a class="return-btn" href="javascript:void(0)" title="Check-out">',
             '<i class="glyphicon glyphicon-log-out" style="color: rgb(2, 103, 198);"></i>',
             '</a>'
         ].join('');
-	}
+	};
+	
 	window.checkInEvents = {
-			'click .return-btn': function (e, value, row, index) {
-	            alert('You click like action, row: ' + JSON.stringify(row));
+			'click .borrow-btn': function (e, value, row, index) {
+	            
 	        },
-	        'click .remove': function (e, value, row, index) {
-	        	alert('You click like action, row: ' + JSON.stringify(row));
+	        'click .return-btn': function (e, value, row, index) {
+	        	$.get({% url 'returnDevice' %},{sn:row.sn},function(data,status){
+					if ( status == 'success')
+						{
+						 if ( data.indexOf(row.returnAt) == -1 )
+						 {
+						 	$table.bootstrapTable('updateRow',{
+	        					index:index,
+	        					row:{
+	        					returnAt:data
+	        					}
+	        					});
+	        				alert('Return device succeed');	
+						 }
+						 else
+						 {
+						    alert("Device is already returned")
+						 }
+						
+						}
+					else
+						{
+		 				alert('Return device failed.Error: '+ data)
+						}
+				})
 	        }
-	}
+	};
+	
     $(function () {
     });
 </script>

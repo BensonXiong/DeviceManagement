@@ -54,16 +54,17 @@ def return_device(request):
     deviceInstance = Device.objects.get(sn=sn)
     owner = deviceInstance.owner
     if(deviceInstance.owner != DmanageConstant['SystemUser']):      
-        deviceInstance.owner = DmanageConstant['SystemUser']
-        deviceInstance.returnAt = util.getLocalTime()
-        deviceInstance.save();
+        with transaction.atomic():
+            deviceInstance.owner = DmanageConstant['SystemUser']
+            deviceInstance.returnAt = util.getLocalTime()
+            deviceInstance.save();
         
-        _history = History.objects.create(device=deviceInstance)
-        _history.action = DmanageConstant['CheckOut']
-        _history.owner = owner
-        _history.dateAt = deviceInstance.borrowedAt
-        _history.save()
-    return HttpResponse('200')
+            _history = History.objects.create(device=deviceInstance)
+            _history.action = DmanageConstant['CheckOut']
+            _history.owner = owner
+            _history.dateAt = deviceInstance.borrowedAt
+            _history.save()
+    return HttpResponse(deviceInstance.returnAt)
 
 
 def list(request):
@@ -92,7 +93,7 @@ def list_data(request):
     except EmptyPage:
         pageHistory = paginator.page(paginator.num_pages)
     total = paginator.count
-    rows = util.preJsonEncode(pageHistory.object_list.values('name','version','model','imei','owner','borrowedAt','returnAt','slug'))
+    rows = util.preJsonEncode(pageHistory.object_list.values('name','version','model','imei','owner','borrowedAt','returnAt','slug','sn'))
     jData =  {"total":total,"rows":rows}
     return HttpResponse(json.dumps(jData,cls=util.JSONDateTimeEncoder), content_type="application/json")  
 

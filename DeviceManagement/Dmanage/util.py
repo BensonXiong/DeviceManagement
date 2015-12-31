@@ -16,7 +16,7 @@ from datetime import datetime,date
 
 
 def getLocalTime():
-    return timezone.localtime(timezone.now())
+    return timezone.localtime(timezone.now()).strftime('%Y-%m-%d %H:%M:%S')
 
 def preJsonEncode(data):
     """
