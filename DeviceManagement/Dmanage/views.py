@@ -79,6 +79,8 @@ def list_data(request):
     limit = int(request.GET.get('limit'))
     currentPage = currentPage /limit + 1
     search = request.GET.get('search')
+    sortBy = request.GET.get('sort')
+    orderBy = request.GET.get('order')
     if (isinstance(currentPage, int)):
         currentPage = currentPage +1
     if (search):
@@ -86,6 +88,12 @@ def list_data(request):
         _device = Device.objects.extra(where=[searchSql])
     else:
         _device = Device.objects.all()
+    
+    if (sortBy):
+        if (orderBy == DmanageConstant['Asc']):
+            _device = _device.order_by(sortBy)
+        else:
+            _device = _device.order_by("-"+ sortBy)
     paginator = Paginator(_device,limit)
     try:
         pageHistory = paginator.page(currentPage)
@@ -94,7 +102,7 @@ def list_data(request):
     except EmptyPage:
         pageHistory = paginator.page(paginator.num_pages)
     total = paginator.count
-    rows = util.preJsonEncode(pageHistory.object_list.values('name','version','model','imei','owner','borrowedAt','returnAt','slug','sn'))
+    rows = util.preJsonEncode(pageHistory.object_list.values('name','type','version','model','imei','owner','borrowedAt','returnAt','slug','sn'))
     jData =  {"total":total,"rows":rows}
     return HttpResponse(json.dumps(jData,cls=util.JSONDateTimeEncoder), content_type="application/json")  
 
@@ -103,7 +111,7 @@ def device_history_data(request,device_sn_slug):
     limit = int(request.GET.get('limit'))
     currentPage = currentPage /limit + 1
     _device = Device.objects.get(sn=device_sn_slug)
-    _history = History.objects.filter(device__id=_device.id)
+    _history = History.objects.filter(device__id=_device.id).order_by('-dateAt')
     paginator = Paginator(_history,limit)
     try:
         pageHistory = paginator.page(currentPage)       

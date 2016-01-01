@@ -1,8 +1,1 @@
-INSTUPDmanage.admin
-C:\Users\Benson\DjangoWorkspace\DeviceManagement\Dmanage\admin.py
-INFOS:&&1|1|2|0&&3|3|2|1&&3|4|2|1&&3|5|2|1
-list_display=3
-Dmanage.admin=2
-prepopulated_fields=5
-DeviceAdmin=1
-search_fields=4
+DELSTRDmanage.DmanageConstant

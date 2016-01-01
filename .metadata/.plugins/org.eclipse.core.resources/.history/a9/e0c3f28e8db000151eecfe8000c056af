@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% load staticfiles %}
+    <title>Device Management</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href='{% static "assets/bootstrap/css/bootstrap.min.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/bootstrap-table/src/bootstrap-table.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/examples.css" %}'>
+    <script src='{% static "assets/jquery.min.js" %}'></script>
+    <script src='{% static "assets/bootstrap/js/bootstrap.js" %}'></script>
+    <script src='{% static "assets/bootstrap-table/src/bootstrap-table.js" %}'></script>
+    <script src='{% static "assets/ga.js" %}'></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Device Management</h1>
+        <table id="table"
+               data-toggle="table"
+               data-url="{% url 'list_data' %}"
+               data-height="400"
+               data-side-pagination="server"
+               data-pagination="true"
+               data-page-list="[5, 10, 20, 50, 100, 200]"
+               data-search="true">
+            <thead>
+            <tr>
+                <th data-field="name" data-formatter="nameFormatter">name</th>
+                <th data-field="version">version</th>
+                <th data-field="model">model</th>
+                <th data-field="imei">imei</th>
+                <th data-field="owner">owner</th>
+                <th data-field="borrowedAt">borrowedAt</th>
+                <th data-field="returnAt">returnAt</th>
+                <th data-field="slug" data-formatter="historyFormatter">History</th>
+                <th data-field="CheckIn" data-formatter="checkInFormatter" data-align="center" data-events="checkInEvents">Check-in</th>
+                <th data-field="CheckOut" data-formatter="checkOutFormatter" data-align="center" data-events="checkInEvents">Check-out</th>
+            </tr>
+            
+            </thead>
+        </table>
+    </div>
+<script>
+    var $table = $('#table');
+    function nameFormatter(value)
+    {
+    return value
+    };
+    
+    //To do ,use the url pattern
+	function historyFormatter(value)
+	{
+    	return ['<a href="',"{% url 'device_history' 'hisValueReg' %}",'">History</a>'].join("").replace(/hisValueReg/,value)
+//	return '<a href="/list/'+ value + '/history/">History</a>'
+	};
+	
+	function checkInFormatter(value)
+	{
+	return [
+            '<a class="borrow-btn" href="javascript:void(0)" title="Check-in">',
+            '<i class="glyphicon glyphicon-log-in" style="color: rgb(2, 103, 198);"></i>',
+            '</a>  ',
+        ].join('');
+	};
+	
+	function checkOutFormatter(value)
+	{
+	return [
+ 
+            '<a class="return-btn" href="javascript:void(0)" title="Check-out">',
+            '<i class="glyphicon glyphicon-log-out" style="color: rgb(2, 103, 198);"></i>',
+            '</a>'
+        ].join('');
+	};
+	
+	window.checkInEvents = {
+			'click .borrow-btn': function (e, value, row, index) {
+		     window.location.href = "{% url 'borrowDeviceForm' %}?sn="+ row.sn
+	        },
+	        'click .return-btn': function (e, value, row, index) {
+	        	$.get({% url 'returnDevice' %},{sn:row.sn},function(data,status){
+					if ( status == 'success')
+						{
+						 if ( data.indexOf(row.returnAt) == -1 )
+						 {
+						 	$table.bootstrapTable('updateRow',{
+	        					index:index,
+	        					row:{
+	        					returnAt:data
+	        					}
+	        					});
+	        				alert('Return device succeed');	
+						 }
+						 else
+						 {
+						    alert("Device is already returned")
+						 }
+						
+						}
+					else
+						{
+		 				alert('Return device failed.Error: '+ data)
+						}
+				})
+	        }
+	};
+	
+    $(function () {
+    });
+</script>
+</body>
+</html>
