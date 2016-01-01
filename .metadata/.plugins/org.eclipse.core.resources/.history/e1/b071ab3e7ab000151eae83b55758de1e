@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    {% load staticfiles %}
+    <link rel="stylesheet" href='{% static "css/style.css" %}'>
+    </head>
+
+    <body>
+     <div class="container">  
+        <form id="contact" method="post" action="{% url 'borrowDeviceForm' %}">
+			<h3>Borrow device</h3>
+    		<h4>Contact us today, and get reply with in 24 hours!</h4>
+            {% csrf_token %}
+           	{% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+               <div>
+               {{ field.label_tag }}{{field}}
+               {{ field.errors }}
+               </div>
+            {% endfor %}
+
+            <div><input type="submit" name="submit" value="Submit" /><div>
+        </form>
+        </div>
+    </body>
+
+</html>

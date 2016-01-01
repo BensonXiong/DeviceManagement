@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    {% load bootstrap %}
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/css/app.css">
+    </head>
+
+    <body>
+        <form id="borrow_device_form" method="post" action="/borrowDeviceForm/{{device.slug}}/">
+
+<form role="form">
+    <legend>Form Title</legend>
+    {% csrf_token %}
+    {{ form|bootstrap }}
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+    </body>
+
+</html>

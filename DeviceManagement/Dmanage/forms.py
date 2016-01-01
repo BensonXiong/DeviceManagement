@@ -1,12 +1,16 @@
 from django import forms
 from Dmanage.models import Device
+from pip._vendor.pkg_resources import require
 
 class DeviceForm(forms.ModelForm):
     owner = forms.CharField(max_length=128,label="Your name")
+    type = forms.CharField(max_length=128,label="Type",validators=[],widget=forms.TextInput(attrs={'readonly':'readonly'}))
+    version = forms.CharField(max_length=128,label="Version",validators=[],widget=forms.TextInput(attrs={'readonly':'readonly'}))
+    model = forms.CharField(max_length=128,label="Model",validators=[],widget=forms.TextInput(attrs={'readonly':'readonly'}))
     sn = forms.CharField(max_length=128,widget=forms.HiddenInput(),validators=[])
     class Meta:
         model = Device
-        fields = ('owner','sn',)
+        fields = ('owner','sn','version','model','type')
         
     def clean(self):
         cleaned_data = self.cleaned_data

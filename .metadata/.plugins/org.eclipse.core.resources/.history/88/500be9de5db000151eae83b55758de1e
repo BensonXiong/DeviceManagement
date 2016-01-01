@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+
+    <body>
+        <form id="borrow_device_form" method="post" action="/borrowDeviceForm/{{device.slug}}/">
+
+            {% csrf_token %}
+           	{% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+               <div>
+               {{ field.label_tag }}{{field}}
+               {{ field.errors }}
+               </div>
+            {% endfor %}
+
+           <button type="button" class="btn btn-primary">Ô­Ê¼°´Å¥</button>
+        </form>
+    </body>
+
+</html>

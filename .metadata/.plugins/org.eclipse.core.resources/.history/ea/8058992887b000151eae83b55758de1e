@@ -1,0 +1,19 @@
+from django import forms
+from Dmanage.models import Device
+from pip._vendor.pkg_resources import require
+
+class DeviceForm(forms.ModelForm):
+    owner = forms.CharField(max_length=128,label="Your name")
+    type = forms.CharField(max_length=128,label="Type",validators=[])
+    version = forms.CharField(max_length=128,label="Version",validators=[])
+    model = forms.CharField(max_length=128,label="Model",validators=[])
+    sn = forms.CharField(max_length=128,widget=forms.HiddenInput(),validators=[])
+    class Meta:
+        model = Device
+        fields = ('owner','sn','version','model','type')
+        widgets = {
+            'type':Textarea(attrs={'disabled':disabled}),
+        }
+        
+    def clean(self):
+        cleaned_data = self.cleaned_data

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    {% load bootstrap %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href='{% static "assets/bootstrap/css/bootstrap.min.css" %}'>
+    <script src='{% static "assets/jquery.min.js" %}'></script>
+    <script src='{% static "assets/bootstrap/js/bootstrap.js" %}'></script>
+    </head>
+
+    <body>
+        <form id="borrow_device_form" method="post" action="{% url 'borrowDeviceForm' %}">
+
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            <h2>Horizontal form</h2>
+
+            <hr />
+
+            <form class="form-horizontal" role="form" method="post"><input type='hidden' name='csrfmiddlewaretoken' value='cwEyUBxiivfCEtPWWCSJmHYTs2QTbPtA' />
+                
+
+
+    <input id="id_hidden_field" name="hidden_field" type="hidden" />
+
+
+</html>

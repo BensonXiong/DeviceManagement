@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    {% load bootstrap %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href='{% static "assets/bootstrap/css/bootstrap.min.css" %}'>
+    <script src='{% static "assets/jquery.min.js" %}'></script>
+    <script src='{% static "assets/bootstrap/js/bootstrap.js" %}'></script>
+    </head>
+
+    <body>
+        <form id="borrow_device_form" method="post" action="{% url 'borrowDeviceForm' %}">
+
+<form role="form">
+    <legend>Form Title</legend>
+    {% csrf_token %}
+    {{ form|bootstrap }}
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+
+</html>

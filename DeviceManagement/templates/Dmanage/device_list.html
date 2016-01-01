@@ -50,7 +50,8 @@
     //To do ,use the url pattern
 	function historyFormatter(value)
 	{
-	return '<a href="/list/'+ value + '/history/">History</a>'
+    	return ['<a href="',"{% url 'device_history' 'hisValueReg' %}",'">History</a>'].join("").replace(/hisValueReg/,value)
+//	return '<a href="/list/'+ value + '/history/">History</a>'
 	};
 	
 	function checkInFormatter(value)
@@ -74,7 +75,7 @@
 	
 	window.checkInEvents = {
 			'click .borrow-btn': function (e, value, row, index) {
-	            
+		     window.location.href = "{% url 'borrowDeviceForm' %}?sn="+ row.sn
 	        },
 	        'click .return-btn': function (e, value, row, index) {
 	        	$.get({% url 'returnDevice' %},{sn:row.sn},function(data,status){

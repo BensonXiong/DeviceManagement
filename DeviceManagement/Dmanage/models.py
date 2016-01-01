@@ -25,21 +25,6 @@ class Device(models.Model):
     
     def __unicode__(self):
         return self.name
-    
-    def toJSON(self):
-        fields = []
-        for field in self._meta.fields:
-            fields.append(field.name)
-    
-        d = {}
-        for attr in fields:
-            if isinstance(getattr(self, attr),datetime):
-                d[attr] = getattr(self, attr).strftime('%Y-%m-%d %H:%M:%S')
-            elif isinstance(getattr(self, attr),date):
-                d[attr] = getattr(self, attr).strftime('%Y-%m-%d')
-            else:
-                d[attr] = getattr(self, attr)
-        return json.dumps(d)
 
 class History(models.Model):
     device = ForeignKey(Device)

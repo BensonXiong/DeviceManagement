@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    {% load bootstrap %}
+    <link rel="stylesheet" href='{% static "assets/bootstrap/css/bootstrap.min.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/bootstrap-table/src/bootstrap-table.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/examples.css" %}'>
+    <script src='{% static "assets/jquery.min.js" %}'></script>
+    <script src='{% static "assets/bootstrap/js/bootstrap.js" %}'></script>
+    <script src='{% static "assets/bootstrap-table/src/bootstrap-table.js" %}'></script>
+    <script src='{% static "assets/ga.js" %}'></script>
+    </head>
+
+    <body>
+        <form id="borrow_device_form" method="post" action="/borrowDeviceForm/{{device.slug}}/">
+
+<form role="form">
+    <legend>Form Title</legend>
+    {% csrf_token %}
+    {{ form|bootstrap }}
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+
+</html>

@@ -1,0 +1,87 @@
+from django.utils import timezone
+from django.db import models
+from django.core.serializers.json import DateTimeAwareJSONEncoder
+from decimal import *
+
+import sys
+
+# Please ignore the compilation error ,it works after relaod(sys).In order to change the coding from ascii to utf-8 
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+import types
+
+import json
+from datetime import datetime,date
+
+
+def getLocalTime():
+    return timezone.localtime(timezone.now())
+
+def preJsonEncode(data):
+    """
+    The main issues with django's default json serializer is that properties that
+    had been added to a object dynamically are being ignored (and it also has 
+    problems with some models).
+    """
+
+    def _any(data):
+        ret = None
+        if type(data) is types.ListType:
+            ret = _list(data)
+        elif type(data) is types.DictType:
+            ret = _dict(data)
+        elif isinstance(data, Decimal):
+            # json.dumps() cant handle Decimal
+            ret = str(data)
+        elif isinstance(data, models.query.QuerySet):
+            # Actually its the same as a list ...
+            ret = _list(data)
+        elif isinstance(data, models.Model):
+            ret = _model(data)
+        else:
+            ret = data
+        return ret
+    
+    def _model(data):
+        ret = {}
+        # If we only have a model, we only want to encode the fields.
+        for f in data._meta.fields:
+            ret[f.attname] = _any(getattr(data, f.attname))
+        # And additionally encode arbitrary properties that had been added.
+        fields = dir(data.__class__) + ret.keys()
+        add_ons = [k for k in dir(data) if k not in fields]
+        for k in add_ons:
+            ret[k] = _any(getattr(data, k))
+        return ret
+    
+    def _list(data):
+        ret = []
+        for v in data:
+            ret.append(_any(v))
+        return ret
+    
+    def _dict(data):
+        ret = {}
+        for k,v in data.items():
+            ret[k] = _any(v)
+        return ret
+    
+    ret = _any(data)
+    
+    return ret
+
+def encodeString(s):
+    if isinstance(s, unicode):
+        return s.encode('gb2312')
+    else:
+        return s.decode('utf-8').encode('gb2312')
+
+class JSONDateTimeEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return obj.strftime('%Y-%m-%d %H:%M:%S')
+        elif isinstance(obj, date):
+            return obj.strftime('%Y-%m-%d')
+        else:
+            return json.JSONEncoder.default(self, obj) 

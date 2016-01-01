@@ -1,0 +1,15 @@
+from django import forms
+from Dmanage.models import Device
+
+class DeviceForm(forms.ModelForm):
+    owner = forms.CharField(max_length=128,label="Your name")
+    type = forms.CharField(max_length=128,label="Type")
+    version = forms.CharField(max_length=128,label="Version",widget=forms.TextInput(attrs={'disabled':'disabled'}))
+    model = forms.CharField(max_length=128,label="Model")
+    sn = forms.CharField(max_length=128,widget=forms.HiddenInput(),validators=[])
+    class Meta:
+        model = Device
+        fields = ('owner','sn','version','model','type')
+        
+    def clean(self):
+        cleaned_data = self.cleaned_data
