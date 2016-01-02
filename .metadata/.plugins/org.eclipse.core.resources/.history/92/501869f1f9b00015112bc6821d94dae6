@@ -1,0 +1,10 @@
+ $(function () {
+	 
+	 if (typeof comm.dm.constnats == )
+	 com.dm.constants = function (){
+		 var name = '名称';
+		 
+	 }
+	 
+	 
+    });

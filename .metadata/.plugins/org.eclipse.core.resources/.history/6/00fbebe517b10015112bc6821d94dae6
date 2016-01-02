@@ -1,0 +1,9 @@
+ $(function () {
+	 
+	 var com = {};
+	 com.dm = {};
+	 com.dm.constants = {
+		 			var name = '名称';
+	 }
+	 
+    });

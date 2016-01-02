@@ -38,7 +38,7 @@
                data-search="false">
             <thead>
             <tr>
-                <th data-field="name" data-formatter="nameFormatter">名称</th>
+                <th data-field="name" data-formatter="nameFormatter">com.dm.constants['name']</th>
                 <th data-field="owner">拥有者</th>
                 <th data-field="action">行为</th>
                 <th data-field="dateAt">时间</th>

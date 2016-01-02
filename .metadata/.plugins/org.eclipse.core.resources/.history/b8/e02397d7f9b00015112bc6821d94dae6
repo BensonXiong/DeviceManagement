@@ -1,6 +1,6 @@
-#Sat Jan 02 10:38:01 CST 2016
+#Sat Jan 02 10:36:48 CST 2016
 eclipse.preferences.version=1
 encoding//Dmanage/DmanageConstant.py=utf-8
 encoding//Dmanage/util.py=utf-8
 encoding//Dmanage/views.py=gb18030
-encoding//static/js/constants.js=UTF-8
+encoding//static/js/dmanage-ajax.js=UTF-8

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;DeviceManagement/static/js/dmanage-ajax.js&apos; to &apos;constants.js&apos;" description="Rename resource &apos;dmanage-ajax.js&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="static/js/dmanage-ajax.js" name="constants.js" stamp="1451702280994" updateReferences="true"/>
+</session>

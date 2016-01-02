@@ -1,0 +1,14 @@
+ $(function () {
+	 
+	 if (typeof com.dm.constants == 'undefined')
+		 {
+		 	var com = {};
+		 	com.dm = {};
+		 	com.dm.constants = function (){
+		 			var name = '名称';
+		 
+		 	}
+		 }
+	 
+	 
+    });

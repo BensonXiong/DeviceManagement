@@ -10,7 +10,6 @@
     <script src='{% static "assets/bootstrap/js/bootstrap.js" %}'></script>
     <script src='{% static "assets/bootstrap-table/src/bootstrap-table.js" %}'></script>
     <script src='{% static "assets/ga.js" %}'></script>
-    <script src='{% static "js/constants.js" %}'></script>
 </head>
 <body>
     <div class="container">

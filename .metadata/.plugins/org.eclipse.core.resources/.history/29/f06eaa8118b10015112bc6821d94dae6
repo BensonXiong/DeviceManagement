@@ -36,12 +36,11 @@
             <tr>
             	<th data-field="state" data-checkbox="true"></th>
                 <th data-field="name" data-formatter="nameFormatter">名称</th>
-                <th data-field="type" data-sortable="true">类型</th>
-                <th data-field="version">版本号</th>
-                <th data-field="model">型号</th>
-                <th data-field="imei">IMEI</th>
-                <th data-field="sn">SN</th>
-                <th data-field="owner">Owner</th>
+                <th data-field="type" data-sortable="true">type</th>
+                <th data-field="version">version</th>
+                <th data-field="model">model</th>
+                <th data-field="imei">imei</th>
+                <th data-field="owner">owner</th>
                 <th data-field="borrowedAt">borrowedAt</th>
                 <th data-field="returnAt">returnAt</th>
                 <th data-field="slug" data-formatter="historyFormatter">History</th>

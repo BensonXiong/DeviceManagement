@@ -1,0 +1,8 @@
+ $(function () {
+	 
+	 com.dm.constants = function (){
+		 var name = 'Ãû³Æ';
+	 }
+	 
+	 
+    });
