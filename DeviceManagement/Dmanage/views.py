@@ -4,10 +4,9 @@ from Dmanage.models import Device,History
 from Dmanage.forms import DeviceForm
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
-from django.core.serializers.json import DateTimeAwareJSONEncoder
-from django.template.context_processors import request
+from django.contrib.auth import authenticate,login
+from django.contrib.auth.decorators import login_required
 from django.db import transaction
-from django.core import serializers
 from DmanageConstant import *
 
 import util
@@ -18,7 +17,7 @@ import json
 
 
 # Create your views here.
-
+@login_required
 def borrowDeviceForm(request):
     sn = request.GET.get('sn')
     device = Device.objects.get(sn=sn)
@@ -49,24 +48,26 @@ def borrowDeviceForm(request):
         print form  
     return render(request,'Dmanage/borrow_device_form.html',{'form':form,'device':device})
     
-
 def return_device(request):
-    sn = request.GET.get('sn')
-    deviceInstance = Device.objects.get(sn=sn)
-    owner = deviceInstance.owner
-    if(deviceInstance.owner != DmanageConstant['SystemUser']):      
-        with transaction.atomic():
-            deviceInstance.owner = DmanageConstant['SystemUser']
-            deviceInstance.returnAt = util.getLocalTime()
-            deviceInstance.save();
+    if  request.user.is_authenticated():
+        sn = request.GET.get('sn')
+        deviceInstance = Device.objects.get(sn=sn)
+        owner = deviceInstance.owner
+        if(deviceInstance.owner != DmanageConstant['SystemUser']):      
+            with transaction.atomic():
+                deviceInstance.owner = DmanageConstant['SystemUser']
+                deviceInstance.returnAt = util.getLocalTime()
+                deviceInstance.save();
         
-            _history = History.objects.create(device=deviceInstance)
-            _history.action = DmanageConstant['CheckOut']
-            _history.owner = owner
-            _history.dateAt = deviceInstance.borrowedAt
-            _history.save()
-    return HttpResponse(deviceInstance.returnAt)
-
+                _history = History.objects.create(device=deviceInstance)
+                _history.action = DmanageConstant['CheckOut']
+                _history.owner = owner
+                _history.dateAt = deviceInstance.borrowedAt
+                _history.save()
+        return HttpResponse(deviceInstance.returnAt)
+    else:
+        jsonr = json.dumps({ 'not_authenticated': True })
+        return HttpResponse(jsonr, content_type='application/json')
 
 def list(request):
     return render(request,'Dmanage/device_list.html',{})
@@ -123,3 +124,25 @@ def device_history_data(request,device_sn_slug):
     rows = util.preJsonEncode(pageHistory.object_list.values('device','owner','action','dateAt'))
     jData =  {"total":total,"rows":rows}
     return HttpResponse(json.dumps(jData,cls=util.JSONDateTimeEncoder), content_type="application/json")  
+
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username,password=password)
+
+        if user:
+            if user.is_active:
+                login(request,user)
+                return HttpResponseRedirect('/list/')
+            else:
+                return HttpResponse("your rango account is disabled")
+
+        else:
+            print "invalid login details: {0} {1}".format(username,password)
+            return HttpResponse("Invalid login details supplied")
+
+    else:
+        return render(request,'Dmanage/login.html',{})

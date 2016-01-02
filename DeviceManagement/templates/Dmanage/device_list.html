@@ -104,6 +104,10 @@
 	        	$.get({% url 'returnDevice' %},{sn:row.sn},function(data,status){
 					if ( status == 'success')
 						{
+						 if ( data.not_authenticated)
+							 {
+							 return window.location.href = "{% url 'login' %}"
+							 }
 						 if ( data.indexOf(row.returnAt) == -1 )
 						 {
 						 	$table.bootstrapTable('updateRow',{
