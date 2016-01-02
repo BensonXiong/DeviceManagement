@@ -84,12 +84,10 @@
         ].join('');
 	};
 	
-	function detailFormatter(index,row)
+	function detailFormatter(value)
 	{
 		var html = [];
-		var exclude = ['state','returnAt','borrowedAt','slug'];
         $.each(row, function (key, value) {
-        	if ( exclude.indexOf(key) == -1 )
             html.push('<p><b>' + key + ':</b> ' + value + '</p>');
         });
         return html.join('');
@@ -126,15 +124,6 @@
 				})
 	        }
 	};
-	
-	Array.prototype.indexOf = function(el){
-        for (var i=0,n=this.length; i<n; i++){
-                if (this[i] === el){
-                        return i;
-                }
-        }
-        return -1;
-}
 	
     $(function () {
     });
