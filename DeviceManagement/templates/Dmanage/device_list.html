@@ -18,8 +18,23 @@
    <script src='{% static "assets/ga.js" %}'></script>
 </head>
 <body>
+<nav class="navbar navbar-default" role="navigation">
     <div class="container">
-        <h1>Device Management</h1>
+   <div class="navbar-header">
+      <a class="navbar-brand">Device Management</a>
+   </div>
+   <div>
+   	  {% if user.is_authenticated %}
+      <p class="navbar-text navbar-right" ><a href="{% url 'logout' %}" class="navbar-link">Log out</a></p>
+      <p class="navbar-text navbar-right">Signed in as {{user.username}}</p>
+      {% else %}
+      <p class="navbar-text navbar-right" ><a href="{% url 'login' %}" class="navbar-link">Log in</a></p>
+      {% endif %}
+   </div>
+   </div>
+</nav>
+    <div class="container">
+            
         <table id="table"
                data-toggle="table"
                data-url="{% url 'list_data' %}"

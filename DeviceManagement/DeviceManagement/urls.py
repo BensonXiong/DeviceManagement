@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^list/data$',views.list_data,name='list_data'),
     url(r'^list/(?P<device_sn_slug>\w+)/history/data$',views.device_history_data,name='device_history_data'),
     url(r'^login/$', views.user_login, name='login'), 
+    url(r'^logout/$', views.user_logout, name='logout'),
 ]
