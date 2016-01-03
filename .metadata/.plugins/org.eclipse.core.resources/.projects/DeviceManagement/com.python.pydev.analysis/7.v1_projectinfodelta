@@ -1,6 +1,8 @@
 INSTUPDmanage.views
 C:\Users\Benson\DjangoWorkspace\DeviceManagement\Dmanage\views.py
-INFOS:&&2|1|2|0&&2|3|2|0&&2|4|2|0&&2|5|2|0&&2|6|2|0&&2|7|2|0
+INFOS:&&2|1|2|0&&2|3|2|0&&2|4|2|0&&2|5|2|0&&2|6|2|0&&2|7|2|0&&2|8|2|0&&2|9|2|0
+user_login=8
+user_logout=9
 Dmanage.views=2
 device_history_data=7
 list=4

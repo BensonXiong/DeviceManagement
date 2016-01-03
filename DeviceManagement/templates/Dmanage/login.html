@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!-- Is anyone getting tired of repeatedly entering the header over and over?? -->
-        <title>Rango</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href='{% static "css/signin.css" %}'>
+    <link rel="stylesheet" href='{% static "css/style.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/bootstrap/css/bootstrap.min.css" %}'>
     </head>
 
     <body>
-        <h1>Login to Rango</h1>
+     <div class="container">
 
-        <form id="login_form" method="post" action="/login/">
-            {% csrf_token %}
-            Username: <input type="text" name="username" value="" size="50" />
-            <br />
-            Password: <input type="password" name="password" value="" size="50" />
-            <br />
-
-            <input type="submit" value="submit" />
+   <form class="form-signin" role="form" method="post" action=".">
+{% csrf_token %}
+	{% if not_authenticated %}
+     <p class="errornote">
+    Please enter the correct username and password for a staff account. Note that both fields may be case-sensitive.
+	</p>
+{% endif %}
+<h2 class="form-signin-heading">Please sign in</h2>
+<input class="form-control" placeholder="Username" id="id_username"  name="username" type="text" value="{{username}}"required autofocus=""/>
+<input type="password" class="form-control" placeholder="Password" id="id_password" name="password" type="password" required />
+<div></div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit" />Sign in</button>
         </form>
-
+        </div>
     </body>
 </html>

@@ -132,3 +132,13 @@ ul.errorlist {
     padding: 4px 5px;
   }
 
+.errornote {
+    font-size: 12px !important;
+    font-weight: bold;
+    display: block;
+    padding: 5px 5px 4px 25px;
+    margin: 0 0 3px 0;
+    border: 1px solid #c22;
+    color: #c11;
+    background: #ffefef url(../img/icon_error.gif) 5px .38em no-repeat;
+}

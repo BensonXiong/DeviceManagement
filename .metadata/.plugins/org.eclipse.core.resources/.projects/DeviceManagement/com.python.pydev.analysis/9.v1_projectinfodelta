@@ -1,5 +1,12 @@
-INSTUPDmanage.DmanageConstant
-C:\Users\Benson\DjangoWorkspace\DeviceManagement\Dmanage\DmanageConstant.py
-INFOS:&&3|1|2|0
-Dmanage.DmanageConstant=2
-DmanageConstant=1
+INSTUPDmanage.views
+C:\Users\Benson\DjangoWorkspace\DeviceManagement\Dmanage\views.py
+INFOS:&&2|1|2|0&&2|3|2|0&&2|4|2|0&&2|5|2|0&&2|6|2|0&&2|7|2|0&&2|8|2|0&&2|9|2|0
+user_login=8
+user_logout=9
+Dmanage.views=2
+device_history_data=7
+list=4
+device_history=5
+borrowDeviceForm=1
+list_data=6
+return_device=3

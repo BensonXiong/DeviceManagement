@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% load staticfiles %}
+    <title>Device Management</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href='{% static "assets/bootstrap/css/bootstrap.min.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/bootstrap-table/src/bootstrap-table.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/bootstrap-table/src/extensions/reorder-rows/bootstrap-table-reorder-rows.css" %}'>
+    <link rel="stylesheet" href='{% static "assets/examples.css" %}'>
+    <script src='{% static "assets/jquery.min.js" %}'></script>
+    <script src='{% static "assets/bootstrap/js/bootstrap.js" %}'></script>
+    <script src='{% static "assets/bootstrap-table/src/bootstrap-table.js" %}'></script>
+    <script src='{% static "assets/bootstrap-table/src/extensions/export/bootstrap-table-export.js"  %}'></script>
+    <script src='{% static "assets/bootstrap-table/src/extensions/reorder-rows/bootstrap-table-reorder-rows.js" %}'></script>
+    <script src="//rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
+    <script src="https://rawgit.com/isocra/TableDnD/master/js/jquery.tablednd.js"></script>
+   <script src='{% static "assets/ga.js" %}'></script>
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+   <div class="navbar-header">
+      <a class="navbar-brand" href="#">W3Cschool</a>
+   </div>
+   <div>
+      <p class="navbar-text">Signed in as Thomas</p>
+   </div>
+</nav>
+    <div class="container">
+            
+        <table id="table"
+               data-toggle="table"
+               data-url="{% url 'list_data' %}"
+               data-side-pagination="server"
+               data-pagination="true"
+               data-show-export="true"
+               data-click-to-select="true"
+               data-reorderable-rows="true"
+               data-detail-view="true"
+               data-detail-formatter="detailFormatter"
+               data-page-list="[5, 10, 20, 50, 100, 200]"
+               data-search="true">
+            <thead>
+            <tr>
+            	<th data-field="state" data-checkbox="true"></th>
+                <th data-field="name" data-formatter="nameFormatter">名称</th>
+                <th data-field="type" data-sortable="true">类型</th>
+                <th data-field="version">版本号</th>
+                <th data-field="model">型号</th>
+                <th data-field="imei">IMEI</th>
+                <th data-field="sn">SN</th>
+                <th data-field="owner">Owner</th>
+                <th data-field="borrowedAt">borrowedAt</th>
+                <th data-field="returnAt">returnAt</th>
+                <th data-field="slug" data-formatter="historyFormatter">History</th>
+                <th data-field="CheckIn" data-formatter="checkInFormatter" data-align="center" data-events="checkInEvents">Check-in</th>
+                <th data-field="CheckOut" data-formatter="checkOutFormatter" data-align="center" data-events="checkInEvents">Check-out</th>
+            </tr>
+            
+            </thead>
+        </table>
+    </div>
+<script>
+    var $table = $('#table');
+    function nameFormatter(value)
+    {
+    return value
+    };
+    
+    //To do ,use the url pattern
+	function historyFormatter(value)
+	{
+    	return ['<a href="',"{% url 'device_history' 'hisValueReg' %}",'">History</a>'].join("").replace(/hisValueReg/,value)
+//	return '<a href="/list/'+ value + '/history/">History</a>'
+	};
+	
+	function checkInFormatter(value)
+	{
+	return [
+            '<a class="borrow-btn" href="javascript:void(0)" title="Check-in">',
+            '<i class="glyphicon glyphicon-log-in" style="color: rgb(2, 103, 198);"></i>',
+            '</a>  ',
+        ].join('');
+	};
+	
+	function checkOutFormatter(value)
+	{
+	return [
+ 
+            '<a class="return-btn" href="javascript:void(0)" title="Check-out">',
+            '<i class="glyphicon glyphicon-log-out" style="color: rgb(2, 103, 198);"></i>',
+            '</a>'
+        ].join('');
+	};
+	
+	function detailFormatter(index,row)
+	{
+		var html = [];
+		var exclude = ['state','returnAt','borrowedAt','slug'];
+        $.each(row, function (key, value) {
+        	if ( exclude.indexOf(key) == -1 )
+            html.push('<p><b>' + key + ':</b> ' + value + '</p>');
+        });
+        return html.join('');
+	}
+	
+	window.checkInEvents = {
+			'click .borrow-btn': function (e, value, row, index) {
+		     window.location.href = "{% url 'borrowDeviceForm' %}?sn="+ row.sn
+	        },
+	        'click .return-btn': function (e, value, row, index) {
+	        	$.get({% url 'returnDevice' %},{sn:row.sn},function(data,status){
+					if ( status == 'success')
+						{
+						 if ( data.not_authenticated)
+							 {
+							 return window.location.href = "{% url 'login' %}"
+							 }
+						 if ( data.indexOf(row.returnAt) == -1 )
+						 {
+						 	$table.bootstrapTable('updateRow',{
+	        					index:index,
+	        					row:{
+	        					returnAt:data
+	        					}
+	        					});
+	        				alert('Return device succeed');	
+						 }
+						 else
+						 {
+						    alert("Device is already returned")
+						 }
+						
+						}
+					else
+						{
+		 				alert('Return device failed.Error: '+ data)
+						}
+				})
+	        }
+	};
+	
+	Array.prototype.indexOf = function(el){
+        for (var i=0,n=this.length; i<n; i++){
+                if (this[i] === el){
+                        return i;
+                }
+        }
+        return -1;
+}
+	
+    $(function () {
+    });
+</script>
+</body>
+</html>
