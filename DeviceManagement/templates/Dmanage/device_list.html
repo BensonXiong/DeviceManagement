@@ -1,23 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+{% extends 'Dmanage/base.html'%}
 {% load staticfiles %}
-    <title>Device Management</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href='{% static "assets/bootstrap/css/bootstrap.min.css" %}'>
-    <link rel="stylesheet" href='{% static "assets/bootstrap-table/src/bootstrap-table.css" %}'>
-    <link rel="stylesheet" href='{% static "assets/bootstrap-table/src/extensions/reorder-rows/bootstrap-table-reorder-rows.css" %}'>
-    <link rel="stylesheet" href='{% static "assets/examples.css" %}'>
-    <script src='{% static "assets/jquery.min.js" %}'></script>
-    <script src='{% static "assets/bootstrap/js/bootstrap.js" %}'></script>
-    <script src='{% static "assets/bootstrap-table/src/bootstrap-table.js" %}'></script>
-    <script src='{% static "assets/bootstrap-table/src/extensions/export/bootstrap-table-export.js"  %}'></script>
-    <script src='{% static "assets/bootstrap-table/src/extensions/reorder-rows/bootstrap-table-reorder-rows.js" %}'></script>
-    <script src="//rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
-    <script src="https://rawgit.com/isocra/TableDnD/master/js/jquery.tablednd.js"></script>
-   <script src='{% static "assets/ga.js" %}'></script>
 </head>
 <body>
+{% block body_block %}
 <nav class="navbar navbar-default" role="navigation">
     <div class="container">
    <div class="navbar-header">
@@ -159,5 +147,6 @@
     $(function () {
     });
 </script>
+{% endblock %}
 </body>
 </html>

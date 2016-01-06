@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+{% extends 'Dmanage/base.html'%}
 {% load staticfiles %}
-    <meta charset="utf-8">
-    <link rel="stylesheet" href='{% static "assets/bootstrap/css/bootstrap.min.css" %}'>
-    <link rel="stylesheet" href='{% static "assets/bootstrap-table/src/bootstrap-table.css" %}'>
-    <link rel="stylesheet" href='{% static "assets/examples.css" %}'>
-    <script src='{% static "assets/jquery.min.js" %}'></script>
-    <script src='{% static "assets/bootstrap/js/bootstrap.js" %}'></script>
-    <script src='{% static "assets/bootstrap-table/src/bootstrap-table.js" %}'></script>
-    <script src='{% static "assets/ga.js" %}'></script>
-    <script src='{% static "js/constants.js" %}'></script>
+   {% block reorder_js_block %}
+      {% endblock %}
 </head>
 <body>
+{% block body_block %}
 <nav class="navbar navbar-default" role="navigation">
     <div class="container">
    <div class="navbar-header">
@@ -68,5 +63,6 @@
    		 $(function () {
     });
 </script>
+{% endblock %}
 </body>
 </html>
